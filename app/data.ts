@@ -1,0 +1,69 @@
+export const site = {
+  name: "Andrew Fleck",
+  location: "West Lafayette, Indiana",
+  title: "Systems Engineer & Researcher",
+  statement: "I develop methods for estimating and analyzing dynamical systems under partial observability, with an emphasis on stability, robustness, and sensing uncertainty.",
+  bio: "Andrew Fleck is an engineer and researcher working at the intersection of nonlinear control, state estimation, learning-enabled sensing, and dynamical systems. His work studies how partial observability and sensing degradation affect estimator stability and reliability, and how control-theoretic structure can make learning-enabled systems more dependable.",
+  links: { github: "https://github.com/afleck18", linkedin: "https://www.linkedin.com/in/andrewfleck" },
+};
+
+export const projects = [
+  {
+    slug: "robust-estimation",
+    number: "01",
+    title: "Robust Estimation Under Partial Observability",
+    area: "Nonlinear estimation · sensing degradation",
+    problem: "How does degraded sensing change estimator reliability when the underlying dynamics remain fixed?",
+    approach: "A controlled evaluation of an Extended Kalman Filter under nominal, geometry-dependent, and intermittent sensing regimes.",
+    validation: "Compares covariance-derived uncertainty, residual disagreement, observation-derived stability estimates, and risk indicators while holding the dynamics constant.",
+    significance: "Tests when information loss separates covariance-derived confidence from realized estimation performance.",
+    repo: "https://github.com/afleck18/adaptive-sensing-robustness",
+  },
+  {
+    slug: "latent-dynamics",
+    number: "02",
+    title: "Stability Analysis of Partially Observed Dynamical Systems",
+    area: "Time-varying systems · sparse sensing",
+    problem: "How can time-varying dynamics be recovered and assessed from partial, noisy observations under external forcing?",
+    approach: "A research implementation for stability assessment in non-stationary dynamical models with geophysical and sparse-sensing motivation.",
+    validation: "Compares dynamics-based stability assessment with statistical warning indicators including variance and autocorrelation.",
+    significance: "Examines what stability information remains recoverable when sensing is incomplete and the system is forced.",
+    repo: "https://github.com/afleck18/latent-dynamics-stability",
+  },
+  {
+    slug: "vision-tracking",
+    number: "03",
+    title: "Vision-Based State Estimation and Tracking",
+    area: "Perception · multi-object tracking",
+    problem: "How can reliable trajectories be estimated from noisy RGB and thermal video observations?",
+    approach: "YOLOv8 instance segmentation and ByteTrack tracking, supported by Kalman filtering, Hungarian assignment, and Mahalanobis gating.",
+    validation: "Uses probabilistic trajectory estimation and filtering to reason about association and observation uncertainty.",
+    significance: "Connects learning-enabled sensing to state estimation in environmental and hybrid biological systems.",
+    repo: null,
+  },
+  {
+    slug: "ecg-reconstruction",
+    number: "04",
+    title: "ECG Waveform Reconstruction",
+    area: "Inverse imaging · signal preservation",
+    problem: "How can physiologically meaningful waveform dynamics be recovered from scanned ECG images?",
+    approach: "A senior thesis treating reconstruction as an inverse imaging problem with filtering under noise and distortion.",
+    validation: "Evaluates image-processing choices by their ability to preserve the structure of the underlying waveform.",
+    significance: "Frames document-image processing around recovery of a physical signal rather than image appearance alone.",
+    repo: null,
+  },
+];
+
+export const publications = [
+  { title: "Geometry-Induced Contraction Degradation and Stabilization of Learning-Enabled Observers", status: "Submitted", detail: "IEEE CDC 2026" },
+  { title: "State Estimation in Non-Stationary Geophysical Systems under Forcing and Sparse Sensing", status: "In preparation", detail: null },
+  { title: "Operator-Based Stability Certification for Partially Observed, Forced Geophysical Systems", status: "In preparation", detail: null },
+];
+
+export const capabilities = [
+  ["Estimation & signal processing", "State estimation, nonlinear observers, recursive filtering"],
+  ["Control & systems", "Nonlinear systems, stability analysis, contraction theory"],
+  ["ML & sensing", "Computer vision, detection and tracking, supervised and unsupervised learning, learning-enabled state estimation"],
+  ["Programming", "Python (NumPy, SciPy, OpenCV), MATLAB, C, R, SQL, JavaScript"],
+  ["Systems", "Data pipelines, distributed systems, Azure, Citrix, PowerShell"],
+];
