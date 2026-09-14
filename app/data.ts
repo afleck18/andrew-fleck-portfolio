@@ -66,6 +66,17 @@ export const publications = [
     pdf: "https://arxiv.org/pdf/2608.14925",
     doi: "https://doi.org/10.48550/arXiv.2608.14925",
   },
+  {
+    slug: null,
+    title: "When Corruption Looks Normal: Identical Inputs, Incompatible Observer Actions",
+    authors: "Aditi Acharya and Andrew Fleck",
+    venue: "Submitted to the 2027 IEEE/SICE International Symposium on System Integration (SII 2027).",
+    status: "Submitted",
+    detail: null,
+    paper: null,
+    pdf: null,
+    doi: null,
+  },
   { slug: null, title: "State Estimation in Non-Stationary Geophysical Systems under Forcing and Sparse Sensing", authors: null, venue: null, status: "In preparation", detail: null, paper: null, pdf: null, doi: null },
   { slug: null, title: "Operator-Based Stability Certification for Partially Observed, Forced Geophysical Systems", authors: null, venue: null, status: "In preparation", detail: null, paper: null, pdf: null, doi: null },
 ];
