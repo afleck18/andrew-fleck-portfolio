@@ -32,7 +32,7 @@ h2{font-family:var(--sans);font-weight:720;letter-spacing:-.035em}
 .count{font:750 4rem/1 var(--sans);letter-spacing:-.05em}
 .status{font-family:var(--mono);font-size:.6rem;border-radius:0}
 .page-intro{padding:70px 0 78px}.page-intro h1{font-size:clamp(2.5rem,4vw,4rem)}
-.case-study{grid-template-columns:230px 1fr;gap:6vw;padding:78px 0}
+.case-study{grid-template-columns:230px 1fr;gap:6vw;padding:78px 0}.case-study h2{font-size:clamp(1.35rem,2.2vw,1.8rem);line-height:1.25;letter-spacing:-.025em;max-width:880px}
 .case-index>span{font:700 1.4rem var(--mono);font-style:normal}
 .case-index p,.case-study dt{font-family:var(--mono)}
 .case-study dl{border-bottom:1px solid var(--line)}
@@ -40,7 +40,7 @@ h2{font-family:var(--sans);font-weight:720;letter-spacing:-.035em}
 .timeline-section,.education{padding:78px 0}.timeline h2{font-family:var(--sans);font-weight:700}.timeline time{font-family:var(--mono)}
 .capability-row{grid-template-columns:230px 1fr;gap:6vw}.capability-row h3{font-family:var(--mono);font-size:.76rem;text-transform:uppercase;letter-spacing:.04em}
 footer{border-top:2px solid var(--ink);font-family:var(--mono)}
-@media(max-width:800px){.shell{width:min(100% - 28px,700px)}.split,.case-study,.capability-row{grid-template-columns:1fr}.hero{grid-template-columns:1fr}.signal-card{height:280px}.intro,.selected,.timeline-section,.education,.capabilities{padding:64px 0}}
+@media(max-width:800px){.shell{width:min(100% - 28px,700px)}.split,.case-study,.capability-row{grid-template-columns:1fr}.case-study h2{font-size:1.3rem}.hero{grid-template-columns:1fr}.signal-card{height:280px}.intro,.selected,.timeline-section,.education,.capabilities{padding:64px 0}}
 @media(max-width:520px){.hero h1{font-size:3.15rem}.site-header{height:72px}.page-intro h1{font-size:2.8rem}}
 
 /* Engineering-led homepage */
