@@ -2,11 +2,16 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import systemDiagram from "../public/robust-estimation-system-diagram.png";
 import { projects } from "./data";
 
 const panelTypes = ["estimation", "dynamics", "tracking", "ecg"] as const;
 
 function TechnicalPanel({ type }: { type: (typeof panelTypes)[number] }) {
+  if (type === "estimation") {
+    return <div className="technical-panel diagram-panel"><Image src={systemDiagram} alt="Experimental framework for estimator reliability under degraded sensing" fill sizes="(max-width: 700px) calc(100vw - 116px), 380px" priority unoptimized/></div>;
+  }
   const labels = { estimation: "EST-01", dynamics: "DYN-02", tracking: "TRK-03", ecg: "SIG-04" };
   return <div className={`technical-panel ${type}`} aria-hidden="true">
     <div className="panel-header"><span>{labels[type]}</span><span>{type === "ecg" ? "RECONSTRUCTION" : "SIMULATION"}</span></div>

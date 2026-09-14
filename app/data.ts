@@ -19,7 +19,6 @@ export const projects = [
     validation: "Compares covariance-derived uncertainty, residual disagreement, observation-derived stability estimates, and risk indicators while holding the dynamics constant.",
     significance: "Degraded sensing produces a growing separation between realized estimation error and covariance-based confidence, while also increasing variability in stability estimates derived from the reconstructed trajectory. The results show why estimator accuracy and the reliability of estimator-derived diagnostics must be evaluated separately.",
     cardTitle: "Estimator Reliability Under Degraded Sensing",
-    diagram: "/robust-estimation-system-diagram.png",
     repo: "https://github.com/afleck18/adaptive-sensing-robustness",
   },
   {
