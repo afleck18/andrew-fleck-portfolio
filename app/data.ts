@@ -55,9 +55,19 @@ export const projects = [
 ];
 
 export const publications = [
-  { title: "Geometry-Induced Contraction Degradation and Stabilization of Learning-Enabled Observers", status: "Submitted", detail: "IEEE CDC 2026" },
-  { title: "State Estimation in Non-Stationary Geophysical Systems under Forcing and Sparse Sensing", status: "In preparation", detail: null },
-  { title: "Operator-Based Stability Certification for Partially Observed, Forced Geophysical Systems", status: "In preparation", detail: null },
+  {
+    slug: "geometry-induced-observers",
+    title: "Geometry–Induced Contraction Degradation and Stabilization of Learning-Enabled Observers",
+    authors: "Aditi Acharya and Andrew Fleck",
+    venue: "65th IEEE Conference on Decision and Control (CDC 2026)",
+    status: "Accepted",
+    detail: "Proceedings publication forthcoming",
+    paper: "https://arxiv.org/abs/2608.14925",
+    pdf: "https://arxiv.org/pdf/2608.14925",
+    doi: "https://doi.org/10.48550/arXiv.2608.14925",
+  },
+  { slug: null, title: "State Estimation in Non-Stationary Geophysical Systems under Forcing and Sparse Sensing", authors: null, venue: null, status: "In preparation", detail: null, paper: null, pdf: null, doi: null },
+  { slug: null, title: "Operator-Based Stability Certification for Partially Observed, Forced Geophysical Systems", authors: null, venue: null, status: "In preparation", detail: null, paper: null, pdf: null, doi: null },
 ];
 
 export const capabilities = [
