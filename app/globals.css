@@ -66,3 +66,5 @@ footer{border-top:2px solid var(--ink);font-family:var(--mono)}
 @media(max-width:700px){.paper-header{padding:50px 0}.paper-layout{grid-template-columns:1fr;padding:48px 0 70px}.paper-header h1{font-size:1.85rem}.publication-list h2{font-size:1.3rem}.publication-actions{align-items:flex-start}}
 .publication-intro{padding-bottom:46px}.publication-intro>h1+p{margin-top:.75rem}
 @media(max-width:700px){.publication-intro{padding-bottom:38px}}
+.case-study{padding:58px 0}.case-study dl{margin:1.35rem 0 1.5rem}
+@media(max-width:700px){.case-study{padding:48px 0}.case-study dl{margin:1.1rem 0 1.35rem}}
