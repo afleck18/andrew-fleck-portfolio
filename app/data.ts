@@ -45,7 +45,7 @@ export const projects = [
   {
     slug: "ecg-reconstruction",
     number: "04",
-    title: "ECG Waveform Reconstruction",
+    title: "ECG Inverse Waveform Reconstruction",
     area: "Inverse imaging · signal preservation",
     problem: "How can physiologically meaningful waveform dynamics be recovered from scanned ECG images?",
     approach: "A senior thesis treating reconstruction as an inverse imaging problem with filtering under noise and distortion.",
