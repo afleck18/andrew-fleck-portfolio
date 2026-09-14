@@ -4,6 +4,7 @@ export const site = {
   title: "Systems Engineer & Researcher",
   statement: "I develop methods for estimating and analyzing dynamical systems under partial observability, with an emphasis on stability, robustness, and sensing uncertainty.",
   bio: "Andrew Fleck is an engineer and researcher working at the intersection of nonlinear control, state estimation, learning-enabled sensing, and dynamical systems. His work studies how partial observability and sensing degradation affect estimator stability and reliability, and how control-theoretic structure can make learning-enabled systems more dependable.",
+  aboutBio: "Andrew Fleck develops nonlinear observers and state-estimation methods for partially observed dynamical systems. His research examines how measurement geometry, sensing degradation, and information constraints affect estimator contraction, stability, and robustness—and how observer structure and gain design can restore reliable estimation. His work spans learning-enabled measurement models, adaptive sensing, latent stability inference, and physics-structured estimation for time-varying systems.",
   links: { github: "https://github.com/afleck18", linkedin: "https://www.linkedin.com/in/andrewfleck" },
 };
 
