@@ -3,23 +3,27 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import cdcGeometryContraction from "../public/cdc-geometry-contraction-rmse.png";
 import systemDiagram from "../public/robust-estimation-system-diagram.png";
 import visionStability from "../public/vision-stability.png";
 import { projects, publications } from "./data";
 
 const projectPanelTypes = ["estimation", "dynamics", "tracking", "ecg"] as const;
-export type PanelType = "observer" | "manuscript" | (typeof projectPanelTypes)[number];
+export type PanelType = "cdc" | "manuscript" | (typeof projectPanelTypes)[number];
 
 export function TechnicalPanel({ type }: { type: PanelType }) {
+  if (type === "cdc") {
+    return <div className="technical-panel diagram-panel"><Image src={cdcGeometryContraction} alt="Sensitivity, contraction certificate, and observer RMSE under sensitivity variation" fill sizes="(max-width: 700px) calc(100vw - 116px), 380px" priority unoptimized/></div>;
+  }
   if (type === "estimation") {
-    return <div className="technical-panel diagram-panel"><Image src={systemDiagram} alt="Experimental framework for estimator reliability under degraded sensing" fill sizes="(max-width: 700px) calc(100vw - 116px), 380px" priority unoptimized/></div>;
+    return <div className="technical-panel diagram-panel"><Image src={systemDiagram} alt="Experimental framework for estimator reliability under degraded sensing" fill sizes="(max-width: 700px) calc(100vw - 116px), 380px" unoptimized/></div>;
   }
   if (type === "dynamics") {
     return <div className="technical-panel diagram-panel"><Image src={visionStability} alt="Effect of measurement quality on stability estimation" fill sizes="(max-width: 700px) calc(100vw - 116px), 380px" unoptimized/></div>;
   }
-  const labels = { observer: "OBS-P01", manuscript: "OBS-M02", estimation: "EST-01", dynamics: "DYN-02", tracking: "TRK-03", ecg: "SIG-04" };
-  const modes = { observer: "CONTRACTION", manuscript: "ANALYSIS", estimation: "SIMULATION", dynamics: "SIMULATION", tracking: "SIMULATION", ecg: "RECONSTRUCTION" };
-  const variables = { observer: "e(t), V(t)", manuscript: "y(t), u(t)", estimation: "x(t), x̂(t)", dynamics: "x(t), x̂(t)", tracking: "x̂, ŷ", ecg: "V(t)" };
+  const labels = { cdc: "OBS-P01", manuscript: "OBS-M02", estimation: "EST-01", dynamics: "DYN-02", tracking: "TRK-03", ecg: "SIG-04" };
+  const modes = { cdc: "CONTRACTION", manuscript: "ANALYSIS", estimation: "SIMULATION", dynamics: "SIMULATION", tracking: "SIMULATION", ecg: "RECONSTRUCTION" };
+  const variables = { cdc: "e(t), V(t)", manuscript: "y(t), u(t)", estimation: "x(t), x̂(t)", dynamics: "x(t), x̂(t)", tracking: "x̂, ŷ", ecg: "V(t)" };
   return <div className={`technical-panel ${type}`} aria-hidden="true">
     <div className="panel-header"><span>{labels[type]}</span><span>{modes[type]}</span></div>
     <div className="plot-area"><i className="axis-x"/><i className="axis-y"/><i className="curve primary"/><i className="curve secondary"/>{type === "tracking" && <><b className="target t1"/><b className="target t2"/><b className="target t3"/></>}</div>
@@ -39,7 +43,7 @@ export function ResearchCarousel() {
       href: `/publications/${publications[0].slug}`,
       artifactHref: publications[0].paper,
       artifactLabel: "Paper ↗",
-      panel: "observer" as const,
+      panel: "cdc" as const,
     },
     {
       key: publications[1].anchor!,
