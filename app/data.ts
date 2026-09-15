@@ -15,7 +15,7 @@ export const projects = [
     title: "Robust Estimation Under Partial Observability",
     area: "Nonlinear state estimation · degraded sensing",
     problem: "When observation quality deteriorates, can an estimator remain apparently confident while its state estimates and downstream assessments become unreliable?",
-    approach: "A controlled nonlinear estimation benchmark holds the system evolution—including a prescribed stability transition—identical across experiments while varying only the observation process. An Extended Kalman Filter is evaluated under nominal, state-dependent, and intermittent sensing degradation.",
+    approach: "We hold the nonlinear dynamics and prescribed stability transition fixed across experiments, then vary the observation map to isolate how state-dependent and intermittent information loss propagates through recursive estimation, uncertainty characterization, and observation-derived stability assessment.",
     validation: "Compares covariance-derived uncertainty, residual disagreement, observation-derived stability estimates, and risk indicators while holding the dynamics constant.",
     significance: "Degraded sensing produces a growing separation between realized estimation error and covariance-based confidence, while also increasing variability in stability estimates derived from the reconstructed trajectory. The results show why estimator accuracy and the reliability of estimator-derived diagnostics must be evaluated separately.",
     cardTitle: "Estimator Reliability Under Degraded Sensing",
