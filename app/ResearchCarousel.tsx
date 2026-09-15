@@ -29,7 +29,7 @@ export function ResearchCarousel() {
     <button className="carousel-arrow carousel-arrow-left" type="button" onClick={changePage} aria-label="Show previous research projects" aria-controls="featured-research"><span>{"<"}</span></button>
     <div className="work-grid" id="featured-research" aria-live="polite">{visibleProjects.map((project,index) => {
       const projectIndex = page * 2 + index;
-      return <article className="work-card" key={project.slug}><TechnicalPanel type={panelTypes[projectIndex]}/><div className="work-card-body"><div className="project-title-row"><p className="project-meta">PROJECT {project.number} · {project.cardTitle || project.title}</p><div className="compact-card-links"><Link href={`/research/#${project.slug}`}>Case study →</Link>{project.repo && <a href={project.repo}>Code ↗</a>}</div></div><p className="project-keywords">{project.area}</p></div></article>;
+      return <article className="work-card" key={project.slug}><TechnicalPanel type={panelTypes[projectIndex]}/><div className="work-card-body"><p className="project-meta project-title-line">PROJECT {project.number} · {project.cardTitle || project.title} · <Link href={`/research/#${project.slug}`}>Case study →</Link>{project.repo && <> · <a href={project.repo}>Code ↗</a></>}</p><p className="project-keywords">{project.area}</p></div></article>;
     })}</div>
     <button className="carousel-arrow carousel-arrow-right" type="button" onClick={changePage} aria-label="Show next research projects" aria-controls="featured-research"><span>{">"}</span></button>
     <p className="carousel-position">{page === 0 ? "01–02" : "03–04"} / 04</p>
