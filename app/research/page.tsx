@@ -2,17 +2,19 @@ import { Eyebrow, Shell } from "../components";
 import { projects } from "../data";
 import { TechnicalPanel, type PanelType } from "../ResearchCarousel";
 import systemDiagram from "../../public/robust-estimation-system-diagram.png";
+import visionStability from "../../public/vision-stability.png";
 
 export const metadata = { title: "Research" };
 
-const diagramHref = systemDiagram.src;
 const visualTypes: PanelType[] = ["estimation", "dynamics", "tracking", "ecg"];
-const visualCaptions = ["Open full diagram ↗", "Stability simulation", "Tracking simulation", "Reconstruction view"];
+const visualHrefs = [systemDiagram.src, visionStability.src, null, null];
+const visualCaptions = ["Open full diagram ↗", "Open full figure ↗", "Tracking simulation", "Reconstruction view"];
 
 function DiagramThumbnail({ index, mobile = false }: { index: number; mobile?: boolean }) {
   const panel = <TechnicalPanel type={visualTypes[index]}/>;
+  const href = visualHrefs[index];
   return <figure className={mobile ? "case-diagram case-diagram-mobile" : "case-diagram case-diagram-desktop"}>
-    {index === 0 ? <a className="case-diagram-link" href={diagramHref} target="_blank" rel="noreferrer" aria-label="Open the full experimental framework diagram">{panel}</a> : <div className="case-diagram-frame">{panel}</div>}
+    {href ? <a className="case-diagram-link" href={href} target="_blank" rel="noreferrer" aria-label={`Open the full ${index === 0 ? "experimental framework diagram" : "stability estimation figure"}`}>{panel}</a> : <div className="case-diagram-frame">{panel}</div>}
     <figcaption>{visualCaptions[index]}</figcaption>
   </figure>;
 }
