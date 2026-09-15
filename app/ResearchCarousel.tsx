@@ -50,7 +50,7 @@ export function ResearchCarousel() {
       label: "MANUSCRIPT",
       number: "02",
       title: publications[1].title,
-      meta: "Submitted",
+      meta: "Submitted · SII 2027",
       href: `/publications/#${publications[1].anchor}`,
       artifactHref: null,
       artifactLabel: null,

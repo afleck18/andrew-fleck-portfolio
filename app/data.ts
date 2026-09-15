@@ -74,7 +74,7 @@ export const publications = [
     anchor: "when-corruption-looks-normal",
     title: "When Corruption Looks Normal: Identical Inputs, Incompatible Observer Actions",
     authors: "Aditi Acharya and Andrew Fleck",
-    venue: "Submitted manuscript.",
+    venue: "Submitted to the 2027 IEEE/SICE International Symposium on System Integration (SII 2027).",
     status: "Submitted",
     detail: null,
     paper: null,
