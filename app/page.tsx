@@ -12,7 +12,7 @@ export default function Home() {
 
     <section className="bio-strip"><p className="section-code">00 / PROFILE</p><div><h2>Control systems engineer and researcher</h2><p>{site.aboutBio}</p><p className="location">Purdue University · West Lafayette, Indiana</p></div></section>
 
-    <section className="work-section"><div className="work-heading"><p className="section-code">01 / HIGHLIGHTED WORK</p><div><h2>Research implementations</h2><p>Each project is organized around a defined engineering question, an explicit estimation or analysis method, and a validation strategy.</p></div></div><ResearchCarousel /></section>
+    <section className="work-section"><div className="work-heading"><p className="section-code">01 / HIGHLIGHTED WORK</p><div><h2>Research implementations</h2><p>Selected papers and projects connect engineering questions to concrete estimation, analysis, and validation workflows.</p></div></div><ResearchCarousel /></section>
 
     <section className="output-section"><div><p className="section-code">02 / RESEARCH OUTPUT</p><h2>Manuscripts</h2></div><div className="output-list">{publications.map((p,i) => <article key={p.title}><span className="output-index">P-{String(i+1).padStart(2,"0")}</span><div><h3>{p.slug ? <Link href={`/publications/${p.slug}`}>{p.title}</Link> : p.title}</h3><p>{p.venue || "Manuscript in development"}</p>{p.authors && <p>{p.authors}</p>}{p.detail && <p>{p.detail}</p>}</div><span className={`status ${p.status === "Accepted" ? "accepted" : p.status === "Submitted" ? "submitted" : "preparation"}`}>{p.status}</span></article>)}<Link className="text-link" href="/publications">Publication details →</Link></div></section>
   </Shell>;
