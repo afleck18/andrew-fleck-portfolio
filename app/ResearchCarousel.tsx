@@ -37,18 +37,20 @@ export function ResearchCarousel() {
       href: `/publications/${publications[0].slug}`,
       artifactHref: publications[0].paper,
       artifactLabel: "Paper ↗",
+      panel: "estimation" as const,
     },
     {
       key: publications[1].anchor!,
       label: "MANUSCRIPT",
       number: "02",
       title: publications[1].title,
-      meta: "Submitted · SII 2027",
+      meta: "Submitted",
       href: `/publications/#${publications[1].anchor}`,
       artifactHref: null,
       artifactLabel: null,
+      panel: "dynamics" as const,
     },
-    ...projects.slice(2).map((project) => ({
+    ...projects.slice(0, 3).map((project, index) => ({
       key: project.slug,
       label: "PROJECT",
       number: project.number,
@@ -57,18 +59,20 @@ export function ResearchCarousel() {
       href: `/research/#${project.slug}`,
       artifactHref: project.repo,
       artifactLabel: project.repo ? "Code ↗" : null,
+      panel: panelTypes[index],
     })),
   ];
-  const visibleItems = featuredItems.slice(page * 2, page * 2 + 2);
-  const changePage = () => setPage((current) => current === 0 ? 1 : 0);
+  const lastPage = featuredItems.length - 2;
+  const visibleItems = featuredItems.slice(page, page + 2);
+  const showPrevious = () => setPage((current) => current === 0 ? lastPage : current - 1);
+  const showNext = () => setPage((current) => current === lastPage ? 0 : current + 1);
 
   return <div className="carousel-shell">
-    <button className="carousel-arrow carousel-arrow-left" type="button" onClick={changePage} aria-label="Show previous research projects" aria-controls="featured-research"><span>{"<"}</span></button>
-    <div className="work-grid" id="featured-research" aria-live="polite">{visibleItems.map((item,index) => {
-      const itemIndex = page * 2 + index;
-      return <article className="work-card" key={item.key}><Link className="work-card-visual-link" href={item.href} aria-label={`View ${item.title}`}><TechnicalPanel type={panelTypes[itemIndex]}/></Link><div className="work-card-body"><p className="project-meta project-title-line"><Link className="project-entry-link" href={item.href}>{item.label} {item.number} · {item.title}</Link>{item.artifactHref && <> · <a className="project-code-link" href={item.artifactHref} target="_blank" rel="noopener noreferrer">{item.artifactLabel}</a></>}</p><p className="project-keywords">{item.meta}</p></div></article>;
+    <button className="carousel-arrow carousel-arrow-left" type="button" onClick={showPrevious} aria-label="Show previous research items" aria-controls="featured-research"><span>{"<"}</span></button>
+    <div className="work-grid" id="featured-research" aria-live="polite">{visibleItems.map((item) => {
+      return <article className="work-card" key={item.key}><Link className="work-card-visual-link" href={item.href} aria-label={`View ${item.title}`}><TechnicalPanel type={item.panel}/></Link><div className="work-card-body"><p className="project-meta project-title-line"><Link className="project-entry-link" href={item.href}>{item.label} {item.number} · {item.title}</Link>{item.artifactHref && <> · <a className="project-code-link" href={item.artifactHref} target="_blank" rel="noopener noreferrer">{item.artifactLabel}</a></>}</p><p className="project-keywords">{item.meta}</p></div></article>;
     })}</div>
-    <button className="carousel-arrow carousel-arrow-right" type="button" onClick={changePage} aria-label="Show next research projects" aria-controls="featured-research"><span>{">"}</span></button>
-    <p className="carousel-position">{page === 0 ? "01–02" : "03–04"} / 04</p>
+    <button className="carousel-arrow carousel-arrow-right" type="button" onClick={showNext} aria-label="Show next research items" aria-controls="featured-research"><span>{">"}</span></button>
+    <p className="carousel-position">{String(page + 1).padStart(2, "0")}–{String(page + 2).padStart(2, "0")} / 05</p>
   </div>;
 }
