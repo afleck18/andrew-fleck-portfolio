@@ -6,7 +6,7 @@ export function Header() {
 }
 
 export function Footer() {
-  return <footer><p>Andrew Fleck · West Lafayette, Indiana</p><div><a href={site.links.github}>GitHub <span aria-hidden="true">↗</span></a><a href={site.links.linkedin}>LinkedIn <span aria-hidden="true">↗</span></a></div></footer>;
+  return <footer><p>Andrew Fleck · West Lafayette, Indiana</p><div><a href={site.links.email}>afleck18@gmail.com</a><a href={site.links.github}>GitHub <span aria-hidden="true">↗</span></a><a href={site.links.linkedin}>LinkedIn <span aria-hidden="true">↗</span></a></div></footer>;
 }
 
 export function Shell({ children }: { children: React.ReactNode }) {
