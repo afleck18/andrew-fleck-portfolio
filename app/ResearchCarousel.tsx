@@ -7,8 +7,9 @@ import systemDiagram from "../public/robust-estimation-system-diagram.png";
 import { projects } from "./data";
 
 const panelTypes = ["estimation", "dynamics", "tracking", "ecg"] as const;
+export type PanelType = (typeof panelTypes)[number];
 
-function TechnicalPanel({ type }: { type: (typeof panelTypes)[number] }) {
+export function TechnicalPanel({ type }: { type: PanelType }) {
   if (type === "estimation") {
     return <div className="technical-panel diagram-panel"><Image src={systemDiagram} alt="Experimental framework for estimator reliability under degraded sensing" fill sizes="(max-width: 700px) calc(100vw - 116px), 380px" priority unoptimized/></div>;
   }

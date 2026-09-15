@@ -72,6 +72,6 @@ footer{border-top:2px solid var(--ink);font-family:var(--mono)}
 .publication-intro{padding-bottom:46px}.publication-intro>h1+p{margin-top:.75rem}
 @media(max-width:700px){.publication-intro{padding-bottom:38px}}
 .case-study{padding:58px 0}.case-study dl{margin:1.35rem 0 1.5rem}
-.case-diagram{margin:1.5rem 0 0}.case-diagram-link{display:block;border:1px solid #adbac2;background:#fff;overflow:hidden;transition:border-color .18s ease,box-shadow .18s ease}.case-diagram-link:hover{border-color:#718891;box-shadow:0 6px 18px rgba(38,55,63,.08)}.case-diagram-link img{display:block;width:100%;height:auto}.case-diagram figcaption{margin-top:.45rem;color:#748187;font:600 .57rem/1.45 var(--mono);letter-spacing:.04em;text-transform:uppercase}.case-diagram-mobile{display:none}
+.case-diagram{margin:1.5rem 0 0}.case-diagram-link,.case-diagram-frame{display:block;border:1px solid #adbac2;background:#fff;overflow:hidden;transition:border-color .18s ease,box-shadow .18s ease}.case-diagram-link:hover{border-color:#718891;box-shadow:0 6px 18px rgba(38,55,63,.08)}.case-diagram .technical-panel{width:100%;height:auto;aspect-ratio:16/9;flex-basis:auto;border:0}.case-diagram figcaption{margin-top:.45rem;color:#748187;font:600 .57rem/1.45 var(--mono);letter-spacing:.04em;text-transform:uppercase}.case-diagram-mobile{display:none}
 @media(max-width:800px){.case-diagram-desktop{display:none}.case-diagram-mobile{display:block;margin:1.25rem 0 1.5rem}}
 @media(max-width:700px){.case-study{padding:48px 0}.case-study dl{margin:1.1rem 0 1.35rem}}
