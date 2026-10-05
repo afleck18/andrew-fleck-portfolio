@@ -14,10 +14,10 @@ export function ProjectFigure({ visual }: { visual: ProjectFigureData }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   return <figure className="theme-item-visual">
-    <button className="project-figure-trigger" type="button" onClick={() => dialogRef.current?.showModal()} aria-label={`Enlarge ${visual.ariaLabel.toLowerCase()}`}>
+    <div className="project-figure-preview">
       <TechnicalPanel type={visual.type}/>
-      <span>Enlarge ↗</span>
-    </button>
+    </div>
+    <button className="project-figure-enlarge" type="button" onClick={() => dialogRef.current?.showModal()} aria-label={`Enlarge ${visual.ariaLabel.toLowerCase()}`}>Enlarge ↗</button>
     <dialog className="project-figure-dialog" ref={dialogRef} onClick={(event) => {
       if (event.target === event.currentTarget) event.currentTarget.close();
     }}>
