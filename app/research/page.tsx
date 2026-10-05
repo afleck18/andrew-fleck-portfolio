@@ -14,12 +14,12 @@ const themes = [
   {
     slug: "observer-reliability",
     number: "01",
-    title: "Observer Geometry and Reliable Estimation",
-    keywords: "Nonlinear observers · measurement geometry · robustness",
-    question: "How do measurement geometry and information degradation affect observer contraction, confidence, and decision reliability?",
+    title: "Information Geometry and Reliable Observer Decisions",
+    keywords: "Nonlinear observers · information geometry · decision sufficiency",
+    question: "How do measurement geometry and information loss affect observer contraction, action selection, and downstream reliability?",
     items: [
       { kind: "publication", index: 0, context: "CDC 2026", summary: "Studies how state-dependent measurement sensitivity changes nonlinear-observer contraction margins and develops a Jacobian-based gain normalization that restores stable estimation without retraining the measurement model." },
-      { kind: "publication", index: 1, context: "SII 2027", summary: "Examines cases where identical corrupted inputs can require incompatible observer responses, exposing limits of fixed correction logic under measurement corruption." },
+      { kind: "publication", index: 1, context: "SII 2027", summary: "Formalizes when causal compression maps histories requiring incompatible observer actions to the same scheduler input, showing that bounded, nominal-looking tracking can still conceal persistent physical bias and altered downstream prediction." },
       { kind: "project", index: 0, summary: "Benchmarks an Extended Kalman Filter under nominal, state-dependent, and intermittent sensing degradation to compare estimation error, confidence, and observation-derived stability diagnostics." },
     ],
     visualIndex: 0,
