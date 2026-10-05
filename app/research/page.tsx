@@ -24,7 +24,7 @@ export default function Research() {
     <section className="page-intro publication-intro">
       <Eyebrow>Research & projects</Eyebrow>
       <h1>Engineering questions under uncertain observation.</h1>
-      <p>Case studies are framed around the question, method, and validation philosophy. Unreleased formulations and manuscript details are intentionally omitted.</p>
+      <p>Case studies are framed around a research question and a concise summary of the engineering approach and results. Unreleased formulations and manuscript details are intentionally omitted.</p>
     </section>
     <div className="case-studies">{projects.map((p, index) => <article className="case-study" id={p.slug} key={p.slug}>
       <div className="case-index">
@@ -37,9 +37,7 @@ export default function Research() {
         <DiagramThumbnail index={index} mobile/>
         <dl>
           <div><dt>Question</dt><dd>{p.problem}</dd></div>
-          <div><dt>{p.cardTitle ? "Method" : "Approach"}</dt><dd>{p.approach}</dd></div>
-          <div><dt>Validation</dt><dd>{p.validation}</dd></div>
-          <div><dt>{p.cardTitle ? "Finding" : "Why it matters"}</dt><dd>{p.significance}</dd></div>
+          <div><dt>Summary</dt><dd>{p.approach} {p.validation} {p.significance}</dd></div>
         </dl>
         {p.repo ? <a className="text-link" href={p.repo}>View code repository <span aria-hidden="true">↗</span></a> : <span className="artifact-note">Code link not currently public</span>}
       </div>
