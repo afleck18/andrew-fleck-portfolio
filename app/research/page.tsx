@@ -1,21 +1,20 @@
 import Link from "next/link";
 import { Eyebrow, Shell } from "../components";
 import { projects, publications } from "../data";
-import { TechnicalPanel, type PanelType } from "../ResearchCarousel";
+import { ProjectFigure, type ProjectFigureData } from "../ProjectFigure";
 import cdcGeometryContraction from "../../public/cdc-geometry-contraction-rmse.png";
 import systemDiagram from "../../public/robust-estimation-system-diagram.png";
 import visionStability from "../../public/vision-stability.png";
 
 export const metadata = { title: "Research" };
 
-type ProjectVisual = { type: PanelType; href: string | null; caption: string; ariaLabel: string };
-const publicationVisuals: Array<ProjectVisual | null> = [
+const publicationVisuals: Array<ProjectFigureData | null> = [
   { type: "cdc", href: cdcGeometryContraction.src, caption: "Open CDC project figure ↗", ariaLabel: "Open the full CDC contraction and observer performance figure" },
   null,
   null,
   null,
 ];
-const projectVisuals: ProjectVisual[] = [
+const projectVisuals: ProjectFigureData[] = [
   { type: "estimation", href: systemDiagram.src, caption: "Open project framework ↗", ariaLabel: "Open the full estimator reliability framework" },
   { type: "dynamics", href: visionStability.src, caption: "Open project figure ↗", ariaLabel: "Open the full stability estimation figure" },
   { type: "tracking", href: null, caption: "Tracking simulation", ariaLabel: "Vision tracking simulation" },
@@ -59,14 +58,6 @@ const themes = [
   },
 ] as const;
 
-function ProjectFigure({ visual }: { visual: ProjectVisual }) {
-  const panel = <TechnicalPanel type={visual.type}/>;
-  return <figure className="case-diagram theme-item-visual">
-    {visual.href ? <a className="case-diagram-link" href={visual.href} target="_blank" rel="noreferrer" aria-label={visual.ariaLabel}>{panel}</a> : <div className="case-diagram-frame">{panel}</div>}
-    <figcaption>{visual.caption}</figcaption>
-  </figure>;
-}
-
 export default function Research() {
   return <Shell>
     <section className="page-intro publication-intro">
@@ -92,23 +83,25 @@ export default function Research() {
                 const publication = publications[item.index];
                 const publicationHref = publication.slug ? `/publications/${publication.slug}` : publication.anchor ? `/publications/#${publication.anchor}` : null;
                 const visual = publicationVisuals[item.index];
-                return <article className="theme-item theme-project" key={publication.title}>
-                  <p className="theme-item-kicker">Research project · {item.context}</p>
-                  <span className={`status ${publication.status === "Accepted" ? "accepted" : publication.status === "Submitted" ? "submitted" : "preparation"}`}>{publication.status}</span>
-                  <h4>{publicationHref ? <Link href={publicationHref}>{publication.title}</Link> : publication.title}</h4>
-                  {visual && <ProjectFigure visual={visual}/>}
-                  <p>{item.summary}</p>
-                  {publicationHref && <Link className="theme-item-link" href={publicationHref}>Project details →</Link>}
+                return <article className={`theme-item theme-project${visual ? " has-visual" : ""}`} key={publication.title}>
+                  {visual && <ProjectFigure visual={visual}/>}<div className="theme-item-content">
+                    <p className="theme-item-kicker">Research project · {item.context}</p>
+                    <span className={`status ${publication.status === "Accepted" ? "accepted" : publication.status === "Submitted" ? "submitted" : "preparation"}`}>{publication.status}</span>
+                    <h4>{publicationHref ? <Link href={publicationHref}>{publication.title}</Link> : publication.title}</h4>
+                    <p>{item.summary}</p>
+                    {publicationHref && <Link className="theme-item-link" href={publicationHref}>Project details →</Link>}
+                  </div>
                 </article>;
               }
               const project = projects[item.index];
               const visual = projectVisuals[item.index];
-              return <article className="theme-item theme-project" id={project.slug} key={project.slug}>
-                <p className="theme-item-kicker">Implementation project · {project.area}</p>
-                <h4>{project.title}</h4>
-                <ProjectFigure visual={visual}/>
-                <p>{item.summary}</p>
-                {project.repo ? <a className="theme-item-link" href={project.repo}>Code repository ↗</a> : <span className="artifact-note">Code link not currently public</span>}
+              return <article className="theme-item theme-project has-visual" id={project.slug} key={project.slug}>
+                <ProjectFigure visual={visual}/><div className="theme-item-content">
+                  <p className="theme-item-kicker">Implementation project · {project.area}</p>
+                  <h4>{project.title}</h4>
+                  <p>{item.summary}</p>
+                  {project.repo ? <a className="theme-item-link" href={project.repo}>Code repository ↗</a> : <span className="artifact-note">Code link not currently public</span>}
+                </div>
               </article>;
             })}</div>
           </section>
