@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import cdcGeometryContraction from "../public/cdc-geometry-contraction-rmse.png";
@@ -33,6 +33,14 @@ export function TechnicalPanel({ type }: { type: PanelType }) {
 
 export function ResearchCarousel() {
   const [page, setPage] = useState(0);
+  const [itemsPerView, setItemsPerView] = useState(2);
+  useEffect(() => {
+    const phoneLayout = window.matchMedia("(max-width: 700px)");
+    const updateItemsPerView = () => setItemsPerView(phoneLayout.matches ? 1 : 2);
+    updateItemsPerView();
+    phoneLayout.addEventListener("change", updateItemsPerView);
+    return () => phoneLayout.removeEventListener("change", updateItemsPerView);
+  }, []);
   const featuredItems = [
     {
       key: publications[0].slug!,
@@ -68,10 +76,20 @@ export function ResearchCarousel() {
       panel: projectPanelTypes[index],
     })),
   ];
-  const lastPage = featuredItems.length - 2;
-  const visibleItems = featuredItems.slice(page, page + 2);
-  const showPrevious = () => setPage((current) => current === 0 ? lastPage : current - 1);
-  const showNext = () => setPage((current) => current === lastPage ? 0 : current + 1);
+  const lastPage = featuredItems.length - itemsPerView;
+  const visiblePage = Math.min(page, lastPage);
+  const visibleItems = featuredItems.slice(visiblePage, visiblePage + itemsPerView);
+  const showPrevious = () => setPage((current) => {
+    const normalizedPage = Math.min(current, lastPage);
+    return normalizedPage === 0 ? lastPage : normalizedPage - 1;
+  });
+  const showNext = () => setPage((current) => {
+    const normalizedPage = Math.min(current, lastPage);
+    return normalizedPage === lastPage ? 0 : normalizedPage + 1;
+  });
+  const position = itemsPerView === 1
+    ? `${String(visiblePage + 1).padStart(2, "0")} / 06`
+    : `${String(visiblePage + 1).padStart(2, "0")}–${String(visiblePage + 2).padStart(2, "0")} / 06`;
 
   return <div className="carousel-shell">
     <button className="carousel-arrow carousel-arrow-left" type="button" onClick={showPrevious} aria-label="Show previous research items" aria-controls="featured-research"><span>{"<"}</span></button>
@@ -79,6 +97,6 @@ export function ResearchCarousel() {
       return <article className="work-card" key={item.key}><Link className="work-card-visual-link" href={item.href} aria-label={`View ${item.title}`}><TechnicalPanel type={item.panel}/></Link><div className="work-card-body"><p className="project-meta project-title-line"><Link className="project-entry-link" href={item.href}>{item.label} {item.number} · {item.title}</Link>{item.artifactHref && <> · <a className="project-code-link" href={item.artifactHref} target="_blank" rel="noopener noreferrer">{item.artifactLabel}</a></>}</p><p className="project-keywords">{item.meta}</p></div></article>;
     })}</div>
     <button className="carousel-arrow carousel-arrow-right" type="button" onClick={showNext} aria-label="Show next research items" aria-controls="featured-research"><span>{">"}</span></button>
-    <p className="carousel-position">{String(page + 1).padStart(2, "0")}–{String(page + 2).padStart(2, "0")} / 06</p>
+    <p className="carousel-position">{position}</p>
   </div>;
 }
