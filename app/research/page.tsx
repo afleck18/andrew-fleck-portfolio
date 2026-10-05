@@ -16,6 +16,7 @@ const themes = [
     number: "01",
     title: "Observer Geometry and Reliable Estimation",
     keywords: "Nonlinear observers · measurement geometry · robustness",
+    question: "How do measurement geometry and information degradation affect observer contraction, confidence, and decision reliability?",
     items: [
       { kind: "publication", index: 0, context: "CDC 2026", summary: "Studies how state-dependent measurement sensitivity changes nonlinear-observer contraction margins and develops a Jacobian-based gain normalization that restores stable estimation without retraining the measurement model." },
       { kind: "publication", index: 1, context: "SII 2027", summary: "Examines cases where identical corrupted inputs can require incompatible observer responses, exposing limits of fixed correction logic under measurement corruption." },
@@ -28,6 +29,7 @@ const themes = [
     number: "02",
     title: "Stability Under Partial Observation",
     keywords: "Time-varying dynamics · sparse sensing · stability inference",
+    question: "What stability information remains recoverable when dynamics are time-varying, forced, and only partially observed?",
     items: [
       { kind: "publication", index: 2, context: "Manuscript in preparation", summary: "Develops state-estimation methods for non-stationary geophysical systems observed through sparse sensing under external forcing." },
       { kind: "publication", index: 3, context: "Manuscript in preparation", summary: "Investigates operator-based certificates for assessing stability in forced geophysical systems when only partial observations are available." },
@@ -40,6 +42,7 @@ const themes = [
     number: "03",
     title: "Learning-Enabled Sensing and Inverse Reconstruction",
     keywords: "Perception · tracking · inverse imaging",
+    question: "How can physical state and signal structure be recovered when observations arrive through imperfect learned or image-based sensing systems?",
     items: [
       { kind: "project", index: 2, summary: "Combines segmentation, multi-object tracking, and recursive filtering to estimate trajectories from noisy RGB and thermal imagery." },
       { kind: "project", index: 3, summary: "Treats ECG recovery as an inverse-imaging problem, prioritizing preservation of the underlying physiological waveform under scanning noise and distortion." },
@@ -71,7 +74,10 @@ export default function Research() {
         <DiagramThumbnail index={theme.visualIndex}/>
       </div>
       <div>
-        <h2>{theme.title}</h2>
+        <header className="theme-heading">
+          <h2>{theme.title}</h2>
+          <p className="theme-question"><span>Research question</span>{theme.question}</p>
+        </header>
         <DiagramThumbnail index={theme.visualIndex} mobile/>
         <div className="theme-work">
           <section className="theme-work-group" aria-labelledby={`${theme.slug}-projects`}>
