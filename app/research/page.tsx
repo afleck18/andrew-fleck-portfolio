@@ -73,7 +73,7 @@ export default function Research() {
       <div>
         <header className="theme-heading">
           <h2>{theme.title}</h2>
-          <p className="theme-question"><span>Research question</span>{theme.question}</p>
+          <p className="theme-question"><span>Question</span>{theme.question}</p>
         </header>
         <div className="theme-work">
           <section className="theme-work-group" aria-labelledby={`${theme.slug}-projects`}>
