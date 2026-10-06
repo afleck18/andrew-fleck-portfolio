@@ -14,11 +14,11 @@ const publicationVisuals: Array<ProjectFigureData | null> = [
   null,
   null,
 ];
-const projectVisuals: ProjectFigureData[] = [
+const projectVisuals: Array<ProjectFigureData | null> = [
   { type: "estimation", href: systemDiagram.src, caption: "Open project framework ↗", ariaLabel: "Open the full estimator reliability framework" },
   { type: "dynamics", href: visionStability.src, caption: "Open project figure ↗", ariaLabel: "Open the full stability estimation figure" },
-  { type: "tracking", href: null, caption: "Tracking simulation", ariaLabel: "Vision tracking simulation" },
-  { type: "ecg", href: null, caption: "Reconstruction view", ariaLabel: "ECG reconstruction view" },
+  null,
+  null,
 ];
 const themes = [
   {
@@ -95,8 +95,8 @@ export default function Research() {
               }
               const project = projects[item.index];
               const visual = projectVisuals[item.index];
-              return <article className="theme-item theme-project has-visual" id={project.slug} key={project.slug}>
-                <ProjectFigure visual={visual}/><div className="theme-item-content">
+              return <article className={`theme-item theme-project${visual ? " has-visual" : ""}`} id={project.slug} key={project.slug}>
+                {visual && <ProjectFigure visual={visual}/>}<div className="theme-item-content">
                   <p className="theme-item-kicker">Implementation project · {project.area}</p>
                   <h4>{project.title}</h4>
                   <p>{item.summary}</p>

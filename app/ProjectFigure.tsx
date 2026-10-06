@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { TechnicalPanel, type PanelType } from "./ResearchCarousel";
+import { TechnicalPanel, type PanelType } from "./TechnicalPanel";
 
 export type ProjectFigureData = {
   type: PanelType;

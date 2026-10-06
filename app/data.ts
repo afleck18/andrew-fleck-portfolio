@@ -2,9 +2,6 @@ export const site = {
   name: "Andrew Fleck",
   location: "West Lafayette, Indiana",
   title: "Systems Engineer & Researcher",
-  statement: "I develop methods for estimating and analyzing dynamical systems under partial observability, with an emphasis on stability, robustness, and sensing uncertainty.",
-  bio: "Andrew Fleck is an engineer and researcher working at the intersection of nonlinear control, state estimation, learning-enabled sensing, and dynamical systems. His work studies how partial observability and sensing degradation affect estimator stability and reliability, and how control-theoretic structure can make learning-enabled systems more dependable.",
-  aboutBio: "Andrew Fleck develops nonlinear observers and state-estimation methods for partially observed dynamical systems. His research examines how measurement geometry, sensing degradation, and information constraints affect estimator contraction, stability, and robustness—and how observer structure and gain design can restore reliable estimation. His work spans learning-enabled measurement models, adaptive sensing, latent stability inference, and physics-structured estimation for time-varying systems.",
   links: { email: "mailto:afleck18@gmail.com", github: "https://github.com/afleck18", linkedin: "https://www.linkedin.com/in/andrewfleck" },
 };
 
@@ -24,7 +21,8 @@ export const projects = [
     approach: "We hold the nonlinear dynamics and prescribed stability transition fixed across experiments, then vary the observation map to isolate how state-dependent and intermittent information loss propagates through recursive estimation, uncertainty characterization, and observation-derived stability assessment.",
     validation: "Compares covariance-derived uncertainty, residual disagreement, observation-derived stability estimates, and risk indicators while holding the dynamics constant.",
     significance: "Degraded sensing produces a growing separation between realized estimation error and covariance-based confidence, while also increasing variability in stability estimates derived from the reconstructed trajectory. The results show why estimator accuracy and the reliability of estimator-derived diagnostics must be evaluated separately.",
-    cardTitle: "Estimator Reliability Under Degraded Sensing",
+    homeTitle: "Estimator reliability under degraded sensing",
+    homeSummary: "A controlled study of how sensing degradation affects estimation error, uncertainty measures, and reliability assessment.",
     repo: "https://github.com/afleck18/adaptive-sensing-robustness",
   },
   {
@@ -36,6 +34,8 @@ export const projects = [
     approach: "A research implementation for stability assessment in non-stationary dynamical models with geophysical and sparse-sensing motivation.",
     validation: "Compares dynamics-based stability assessment with statistical warning indicators including variance and autocorrelation.",
     significance: "Examines what stability information remains recoverable when sensing is incomplete and the system is forced.",
+    homeTitle: "Stability analysis from partial observations",
+    homeSummary: "Investigates how measurement quality affects estimates of dynamical stability and the detection of changes in system behavior.",
     repo: "https://github.com/afleck18/latent-dynamics-stability",
   },
   {
@@ -47,6 +47,8 @@ export const projects = [
     approach: "YOLOv8 instance segmentation and ByteTrack tracking, supported by Kalman filtering, Hungarian assignment, and Mahalanobis gating.",
     validation: "Uses probabilistic trajectory estimation and filtering to reason about association and observation uncertainty.",
     significance: "Connects learning-enabled sensing to state estimation in environmental and hybrid biological systems.",
+    homeTitle: "Vision-based state estimation and tracking",
+    homeSummary: "Combines visual measurements with probabilistic filtering to estimate trajectories from RGB and thermal video.",
     repo: null,
   },
   {
@@ -58,6 +60,8 @@ export const projects = [
     approach: "A senior thesis treating reconstruction as an inverse imaging problem with filtering under noise and distortion.",
     validation: "Evaluates image-processing choices by their ability to preserve the structure of the underlying waveform.",
     significance: "Frames document-image processing around recovery of a physical signal rather than image appearance alone.",
+    homeTitle: "ECG waveform reconstruction",
+    homeSummary: "Reconstructs physiological waveforms from scanned ECG images using image processing and filtering.",
     repo: null,
   },
 ];
