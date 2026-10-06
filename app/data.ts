@@ -9,9 +9,9 @@ export const site = {
 };
 
 export const aboutBiography = [
-  "I am an independent researcher working on nonlinear state estimation and observer design for partially observed dynamical systems. My research examines how measurement geometry, restricted information, and prior observer actions affect convergence, action selection, and subsequent estimates.",
-  "My current work studies contraction and gain recoverability in learning-enabled observers, information constraints in observer scheduling, and the persistent effects of completed observer interventions. This research combines mathematical analysis with controlled simulation and experiments using recorded sensing data, including native estimator replay with NASA’s Astrobee software. My coauthored work on measurement geometry and observer contraction has been accepted for presentation at the IEEE Conference on Decision and Control in 2026.",
-  "I earned a B.S. in Biomedical Engineering from Purdue University, with a minor in Chemistry. My background includes physiological signal reconstruction, vision-based sensing and tracking, and engineering reliable clinical computing infrastructure. These experiences inform my interest in estimation methods that connect rigorous analysis with the constraints of implemented sensing systems.",
+  "I am an engineer and independent researcher interested in dynamical systems, control, and state estimation. I study how we can infer the behavior of physical systems from incomplete or uncertain measurements, and develop estimation methods that account for their dynamics and sensing conditions.",
+  "My interests include nonlinear observer design, robustness, inverse problems, and the integration of learned models with physical structure. I am particularly drawn to problems in aerospace, robotics, and environmental sensing, where understanding a system requires connecting mathematical analysis with practical constraints on measurement and computation.",
+  "I earned a B.S. in Biomedical Engineering from Purdue University, with a minor in Chemistry. My experience spans physiological signal reconstruction, vision-based sensing and tracking, and distributed clinical computing infrastructure. Across these settings, I have developed an interest in connecting rigorous mathematical reasoning with the design and evaluation of working engineering systems.",
 ];
 
 export const projects = [
@@ -93,7 +93,7 @@ export const publications = [
 
 export const capabilities = [
   ["Estimation", "Nonlinear observers, recursive filtering, Kalman filtering, probabilistic tracking"],
-  ["Analysis and modeling", "Contraction analysis, nonlinear dynamical systems, time-varying models, convex optimization"],
+  ["Analysis and modeling", "Nonlinear dynamical systems, stability and contraction analysis, convex optimization"],
   ["Sensing and reconstruction", "Computer vision, RGB/thermal sensing, inverse imaging, signal processing"],
   ["Scientific computing", "Python (NumPy, SciPy, OpenCV), MATLAB"],
   ["Engineering systems", "Data pipelines, distributed infrastructure, Azure, Citrix, PowerShell"],

@@ -7,10 +7,11 @@ export default function About() {
   return <Shell>
     <section className="page-intro publication-intro about-intro">
       <Eyebrow>About & experience</Eyebrow>
-      <h1>State estimation and dynamical systems</h1>
+      <h1>Dynamical systems, control, and estimation</h1>
       <div className="about-biography">{aboutBiography.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
       <div className="about-links">
-        <Link className="text-link" href="/publications">Selected publications <span aria-hidden="true">→</span></Link>
+        <Link className="text-link" href="/research">Research <span aria-hidden="true">→</span></Link>
+        <Link className="text-link" href="/publications">Publications <span aria-hidden="true">→</span></Link>
         <span className="about-cv-unavailable" aria-disabled="true" title="CV PDF pending approval">Download CV · pending</span>
       </div>
     </section>
@@ -20,8 +21,8 @@ export default function About() {
         <article>
           <time>Dec 2025 — Present</time>
           <h2>Independent Researcher</h2>
-          <p className="timeline-subtitle">Nonlinear state estimation and observer design</p>
-          <p className="timeline-description">Developing control-theoretic analyses of measurement geometry, information constraints, and historical effects in observer dynamics. Work combines contraction analysis, observer-action feasibility, controlled numerical experiments, and paired replay of an implemented flight estimator.</p>
+          <p className="timeline-subtitle">Dynamical systems and state estimation</p>
+          <p className="timeline-description">Conducting research on nonlinear state estimation, observer design, and robustness under incomplete or uncertain sensing. Work combines mathematical analysis, computational modeling, and experimental evaluation using simulated and recorded data.</p>
         </article>
         <article>
           <time>Oct 2023 — Dec 2025</time>
