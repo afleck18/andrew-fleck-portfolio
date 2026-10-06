@@ -8,6 +8,12 @@ export const site = {
   links: { email: "mailto:afleck18@gmail.com", github: "https://github.com/afleck18", linkedin: "https://www.linkedin.com/in/andrewfleck" },
 };
 
+export const aboutBiography = [
+  "I am an independent researcher working on nonlinear state estimation and observer design for partially observed dynamical systems. My research examines how measurement geometry, restricted information, and prior observer actions affect convergence, action selection, and subsequent estimates.",
+  "My current work studies contraction and gain recoverability in learning-enabled observers, information constraints in observer scheduling, and the persistent effects of completed observer interventions. This research combines mathematical analysis with controlled simulation and experiments using recorded sensing data, including native estimator replay with NASA’s Astrobee software. My coauthored work on measurement geometry and observer contraction has been accepted for presentation at the IEEE Conference on Decision and Control in 2026.",
+  "I earned a B.S. in Biomedical Engineering from Purdue University, with a minor in Chemistry. My background includes physiological signal reconstruction, vision-based sensing and tracking, and engineering reliable clinical computing infrastructure. These experiences inform my interest in estimation methods that connect rigorous analysis with the constraints of implemented sensing systems.",
+];
+
 export const projects = [
   {
     slug: "robust-estimation",
@@ -86,9 +92,9 @@ export const publications = [
 ];
 
 export const capabilities = [
-  ["Estimation & signal processing", "State estimation, nonlinear observers, recursive filtering"],
-  ["Control & systems", "Nonlinear systems, stability analysis, contraction theory"],
-  ["ML & sensing", "Computer vision, detection and tracking, supervised and unsupervised learning, learning-enabled state estimation"],
-  ["Programming", "Python (NumPy, SciPy, OpenCV), MATLAB, C, R, SQL, JavaScript"],
-  ["Systems", "Data pipelines, distributed systems, Azure, Citrix, PowerShell"],
+  ["Estimation", "Nonlinear observers, recursive filtering, Kalman filtering, probabilistic tracking"],
+  ["Analysis and modeling", "Contraction analysis, nonlinear dynamical systems, time-varying models, convex optimization"],
+  ["Sensing and reconstruction", "Computer vision, RGB/thermal sensing, inverse imaging, signal processing"],
+  ["Scientific computing", "Python (NumPy, SciPy, OpenCV), MATLAB"],
+  ["Engineering systems", "Data pipelines, distributed infrastructure, Azure, Citrix, PowerShell"],
 ];
