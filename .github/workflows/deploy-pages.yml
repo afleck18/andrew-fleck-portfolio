@@ -1,7 +1,5 @@
 name: Deploy portfolio to GitHub Pages
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
@@ -20,6 +18,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - run: npm run lint
+      - run: npx tsc --noEmit
       - name: Build static site
         env:
           PAGES_BASE_PATH: ${{ github.event.repository.name == 'afleck18.github.io' && '' || format('/{0}', github.event.repository.name) }}
