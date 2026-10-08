@@ -19,12 +19,12 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run lint
-      - run: npx tsc --noEmit
       - name: Build static site
         env:
           PAGES_BASE_PATH: ${{ github.event.repository.name == 'afleck18.github.io' && '' || format('/{0}', github.event.repository.name) }}
           NEXT_PUBLIC_SITE_URL: ${{ format('https://afleck18.github.io/{0}', github.event.repository.name) }}
         run: npm run build
+      - run: npx tsc --noEmit
       - run: npm test
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
