@@ -2,7 +2,7 @@ import Link from "next/link";
 import { site } from "./data";
 
 export function Header() {
-  return <header className="site-header"><Link className="wordmark" href="/">AF<span>.</span></Link><nav aria-label="Primary navigation"><Link href="/research">Research</Link><Link href="/publications">Publications</Link><Link href="/about">About</Link><span className="nav-disabled" title="Résumé PDF pending approval">Résumé</span></nav></header>;
+  return <header className="site-header"><Link className="wordmark" href="/">AF<span>.</span></Link><nav aria-label="Primary navigation"><Link href="/research">Research</Link><Link href="/publications">Publications</Link><Link href="/about">About</Link><Link href="/andrew-fleck-resume.pdf">Résumé</Link></nav></header>;
 }
 
 export function Footer() {

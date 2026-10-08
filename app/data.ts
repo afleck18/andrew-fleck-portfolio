@@ -1,14 +1,14 @@
 export const site = {
   name: "Andrew Fleck",
   location: "West Lafayette, Indiana",
-  title: "Systems Engineer & Researcher",
+  title: "Engineer & Researcher",
   links: { email: "mailto:afleck18@gmail.com", github: "https://github.com/afleck18", linkedin: "https://www.linkedin.com/in/andrewfleck" },
 };
 
 export const aboutBiography = [
   "I am an engineer and independent researcher interested in dynamical systems, control, and state estimation. I study how we can infer the behavior of physical systems from incomplete or uncertain measurements, and develop estimation methods that account for their dynamics and sensing conditions.",
   "My interests include nonlinear observer design, robustness, inverse problems, and the integration of learned models with physical structure. I am particularly drawn to problems in aerospace, robotics, and environmental sensing, where understanding a system requires connecting mathematical analysis with practical constraints on measurement and computation.",
-  "I earned a B.S. in Biomedical Engineering from Purdue University, with a minor in Chemistry. My experience spans physiological signal reconstruction, vision-based sensing and tracking, and distributed clinical computing infrastructure. Across these settings, I have developed an interest in connecting rigorous mathematical reasoning with the design and evaluation of working engineering systems.",
+  "I earned a B.S. in Biomedical Engineering from Purdue University, with a minor in Chemistry. My experience spans physiological signal reconstruction, vision-based sensing and tracking, and distributed clinical computing infrastructure.",
 ];
 
 export const projects = [
@@ -80,12 +80,25 @@ export const publications = [
     doi: "https://doi.org/10.48550/arXiv.2608.14925",
   },
   {
-    slug: null,
+    slug: "when-corruption-looks-normal",
     anchor: "when-corruption-looks-normal",
     title: "When Corruption Looks Normal: Identical Inputs, Incompatible Observer Actions",
     authors: "Aditi Acharya and Andrew Fleck",
     venue: "Submitted to the 2027 IEEE/SICE International Symposium on System Integration (SII 2027).",
     status: "Submitted",
+    detail: null,
+    paper: null,
+    pdf: null,
+    doi: null,
+  },
+  {
+    slug: null,
+    anchor: "ghost-in-the-observer",
+    title: "The Ghost in the Observer: Silent Propagation and Re-Exposure of Historical Actions",
+    authors: "Aditi Acharya and Andrew Fleck",
+    venue: "American Control Conference (ACC 2027)",
+    status: "Submitted",
+    summary: "Studies how completed observer interventions can continue to influence subsequent observer dynamics and forecasts, including silent propagation and later re-exposure of their effects.",
     detail: null,
     paper: null,
     pdf: null,

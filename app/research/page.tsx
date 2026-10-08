@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Eyebrow, Shell } from "../components";
 import { projects, publications } from "../data";
@@ -6,7 +7,10 @@ import cdcGeometryContraction from "../../public/cdc-geometry-contraction-rmse.p
 import systemDiagram from "../../public/robust-estimation-system-diagram.png";
 import visionStability from "../../public/vision-stability.png";
 
-export const metadata = { title: "Research" };
+const base = process.env.NEXT_PUBLIC_SITE_URL || "https://afleck18.github.io/andrew-fleck-portfolio";
+const metadataTitle = "Research — Andrew Fleck";
+const metadataDescription = "Research themes and projects in nonlinear observers, partial observation, sensing, tracking, and signal reconstruction.";
+export const metadata: Metadata = { title: "Research", description: metadataDescription, alternates: { canonical: `${base}/research/` }, openGraph: { title: metadataTitle, description: metadataDescription, url: `${base}/research/`, type: "website" }, twitter: { card: "summary", title: metadataTitle, description: metadataDescription } };
 
 const publicationVisuals: Array<ProjectFigureData | null> = [
   {
@@ -15,6 +19,7 @@ const publicationVisuals: Array<ProjectFigureData | null> = [
     caption: "Sensitivity sweep comparing contraction-certificate behavior and observer RMSE as measurement sensitivity varies.",
     ariaLabel: "CDC sensitivity, contraction-certificate, and observer-RMSE figure",
   },
+  null,
   null,
   null,
   null,
@@ -49,7 +54,7 @@ const themes = [
         kind: "publication",
         index: 0,
         label: "Research paper · IEEE CDC 2026",
-        summary: "Examines how learned measurement geometry affects nonlinear-observer contraction, characterizes when scalar-gain adjustment can recover contraction, and develops uncertainty-aware certification for gain intervention without retraining the measurement model.",
+        summary: "Examines how learned measurement geometry affects observer contraction, characterizes when scalar-gain adjustment can recover it, and develops uncertainty-aware certification for gain intervention.",
       },
       {
         kind: "publication",
@@ -58,11 +63,11 @@ const themes = [
         summary: "Characterizes when histories indistinguishable through a scheduler’s available information require incompatible observer actions. Experiments examine how bounded, diagnostically nominal estimates can remain physically incorrect under coherent corruption.",
       },
       {
-        kind: "ongoing",
-        title: "Historical Effects of Observer Interventions",
-        label: "Ongoing research · Observer dynamics",
-        status: "In development",
-        summary: "Investigating how a completed observer intervention can continue to influence later estimates and forecasts. Current experiments use paired replay of NASA’s Astrobee estimator on recorded data to examine persistent state differences after a single correction intervention.",
+        kind: "publication",
+        index: 2,
+        label: "Submitted manuscript · ACC 2027",
+        summary: "Studies how completed observer interventions can continue to influence subsequent observer dynamics and forecasts, including silent propagation and later re-exposure of their effects.",
+        development: "Native Astrobee replay remains an experimental line of development supporting the theoretical analysis; it is not presented as completed validation of the submitted manuscript.",
         note: "Native replay results remain conditional on assumed historical calibration and do not yet establish the complete matched-action chronology of differential silence and re-exposure.",
       },
       {
@@ -70,7 +75,7 @@ const themes = [
         index: 0,
         label: "Computational study · Nonlinear estimation · Degraded sensing",
         displayTitle: "Estimator Reliability Under Degraded Sensing",
-        summary: "Evaluates an Extended Kalman Filter under nominal, state-dependent, and intermittent sensing degradation, examining whether covariance-based confidence tracks realized estimation error and how observation quality affects stability diagnostics.",
+        summary: "Controlled sensing regimes are compared while the underlying dynamics remain fixed. The study examines how estimation error, covariance-based confidence, and observation-derived diagnostics respond to information loss.",
       },
     ],
   },
@@ -83,7 +88,7 @@ const themes = [
     items: [
       {
         kind: "publication",
-        index: 2,
+        index: 3,
         label: "Ongoing research · Geophysical reconstruction",
         summary: "Developing a physics-structured approach to sea-surface-temperature reconstruction under sparse observations, time-varying sensing, and known external forcing.",
       },
@@ -92,11 +97,11 @@ const themes = [
         index: 1,
         label: "Computational study · Dynamical inference",
         displayTitle: "Stability Analysis from Partial Observations",
-        summary: "Investigates how measurement quality affects estimates of dynamical stability and the detection of changes in system behavior.",
+        summary: "The project compares dynamical stability estimates under good and degraded measurements, examining whether observation quality changes the apparent timing and character of system transitions.",
       },
       {
         kind: "publication",
-        index: 3,
+        index: 4,
         label: "Ongoing research · Operator-based analysis",
         summary: "Investigates operator-based approaches to stability assessment for forced geophysical systems under partial observation.",
       },
@@ -154,18 +159,6 @@ export default function Research() {
           <section className="theme-work-group" aria-labelledby={`${theme.slug}-projects`}>
             <h3 id={`${theme.slug}-projects`}>Projects</h3>
             <div className="theme-item-list">{theme.items.map((item) => {
-              if (item.kind === "ongoing") {
-                return <article className="theme-item theme-project" key={item.title}>
-                  <div className="theme-item-content">
-                    <p className="theme-item-kicker">{item.label}</p>
-                    <span className="status preparation">{item.status}</span>
-                    <h4>{item.title}</h4>
-                    <p>{item.summary}</p>
-                    <p className="research-scope-note">{item.note}</p>
-                  </div>
-                </article>;
-              }
-
               if (item.kind === "publication") {
                 const publication = publications[item.index];
                 const publicationHref = publication.slug ? `/publications/${publication.slug}` : publication.anchor ? `/publications/#${publication.anchor}` : null;
@@ -178,6 +171,8 @@ export default function Research() {
                     {publication.authors && <p className="theme-item-authors">{publication.authors}</p>}
                     {publication.detail && <p className="theme-item-detail">{publication.detail}</p>}
                     <p>{item.summary}</p>
+                    {"development" in item && <p className="research-scope-note"><strong>Experimental development.</strong> {item.development}</p>}
+                    {"note" in item && <p className="research-scope-note">{item.note}</p>}
                     {(publicationHref || publication.paper) && <div className="theme-item-actions">{publicationHref && <Link className="theme-item-link" href={publicationHref}>Publication details →</Link>}{publication.paper && <a className="theme-item-link" href={publication.paper} target="_blank" rel="noopener noreferrer">Paper ↗</a>}</div>}
                   </div>
                   {visual && <ProjectFigure visual={visual}/>}

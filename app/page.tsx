@@ -1,12 +1,18 @@
 import Image, { type StaticImageData } from "next/image";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Shell } from "./components";
 import { projects, publications } from "./data";
 import systemDiagram from "../public/robust-estimation-system-diagram.png";
 import visionStability from "../public/vision-stability.png";
 
+const base = process.env.NEXT_PUBLIC_SITE_URL || "https://afleck18.github.io/andrew-fleck-portfolio";
+const homeTitle = "Andrew Fleck — Engineer & Researcher";
+const homeDescription = "Research in nonlinear control, state estimation, learning-enabled sensing, and partially observed dynamical systems.";
+export const metadata: Metadata = { title: { absolute: homeTitle }, description: homeDescription, alternates: { canonical: `${base}/` }, openGraph: { title: homeTitle, description: homeDescription, url: `${base}/`, type: "website" }, twitter: { card: "summary", title: homeTitle, description: homeDescription } };
+
 const publicationSummaries = [
-  "Examines how learned measurement geometry affects observer contraction and when scalar-gain adjustment can recover it.",
+  "Examines how learned measurement geometry affects observer contraction, characterizes when scalar-gain adjustment can recover it, and develops uncertainty-aware certification for gain intervention.",
   "Studies when histories that are indistinguishable through an observer’s available information require incompatible next actions.",
 ];
 
@@ -50,7 +56,7 @@ export default function Home() {
       <p className="section-code">00 / Profile</p>
       <div>
         <h2>Research interests and approach</h2>
-        <p>I am interested in how dynamics, physical structure, and available measurements shape what we can infer about a system. My work combines mathematical analysis, computational modeling, and experimental evaluation, with particular interests in aerospace, robotics, and environmental sensing.</p>
+        <p>My work combines mathematical analysis, computational modeling, and experimental evaluation. I am particularly interested in estimation problems in aerospace, robotics, and environmental sensing.</p>
         <div className="profile-facts"><span>B.S. Biomedical Engineering, Purdue University</span><span>Based in West Lafayette, Indiana</span></div>
         <Link className="text-link profile-link" href="/about">About and experience <span aria-hidden="true">→</span></Link>
       </div>
@@ -84,7 +90,7 @@ export default function Home() {
             <p className="project-meta">Project {project.number} · {project.area}</p>
             <h3><Link href={detailHref}>{project.homeTitle}</Link></h3>
             <p>{project.homeSummary}</p>
-            <div className="home-card-actions"><Link href={detailHref}>Project details →</Link>{project.repo && <a href={project.repo} target="_blank" rel="noopener noreferrer">Code ↗</a>}</div>
+            <div className="home-card-actions"><Link href={detailHref}>Research summary →</Link>{project.repo && <a href={project.repo} target="_blank" rel="noopener noreferrer">Code ↗</a>}</div>
           </div>
         </article>;
       })}</div>
