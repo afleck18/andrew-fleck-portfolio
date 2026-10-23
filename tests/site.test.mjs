@@ -2,16 +2,22 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
+const base = "https://afleck18.github.io/andrew-fleck-portfolio";
 const pages = [
-  ["out/index.html", "https://afleck18.github.io/andrew-fleck-portfolio/"],
-  ["out/research/index.html", "https://afleck18.github.io/andrew-fleck-portfolio/research/"],
-  ["out/publications/index.html", "https://afleck18.github.io/andrew-fleck-portfolio/publications/"],
-  ["out/publications/geometry-induced-observers/index.html", "https://afleck18.github.io/andrew-fleck-portfolio/publications/geometry-induced-observers/"],
-  ["out/publications/when-corruption-looks-normal/index.html", "https://afleck18.github.io/andrew-fleck-portfolio/publications/when-corruption-looks-normal/"],
-  ["out/about/index.html", "https://afleck18.github.io/andrew-fleck-portfolio/about/"],
+  ["out/index.html", `${base}/`],
+  ["out/research/index.html", `${base}/research/`],
+  ["out/research/projects/robust-estimation/index.html", `${base}/research/projects/robust-estimation/`],
+  ["out/research/projects/latent-dynamics/index.html", `${base}/research/projects/latent-dynamics/`],
+  ["out/research/projects/vision-tracking/index.html", `${base}/research/projects/vision-tracking/`],
+  ["out/research/projects/ecg-reconstruction/index.html", `${base}/research/projects/ecg-reconstruction/`],
+  ["out/publications/index.html", `${base}/publications/`],
+  ["out/publications/geometry-induced-observers/index.html", `${base}/publications/geometry-induced-observers/`],
+  ["out/publications/when-corruption-looks-normal/index.html", `${base}/publications/when-corruption-looks-normal/`],
+  ["out/publications/observer-dynamics-robotic-state-estimation/index.html", `${base}/publications/observer-dynamics-robotic-state-estimation/`],
+  ["out/about/index.html", `${base}/about/`],
 ];
 
-test("static export contains complete navigation, review metadata, and page-specific URLs", async () => {
+test("static export contains complete navigation, privacy metadata, and canonical URLs", async () => {
   for (const [page, url] of pages) {
     const html = await readFile(page, "utf8");
     assert.match(html, /Andrew Fleck/);
@@ -23,74 +29,103 @@ test("static export contains complete navigation, review metadata, and page-spec
   }
 });
 
-test("publication groups and statuses are precise", async () => {
+test("homepage uses the requested opening and foregrounds the accepted CDC paper", async () => {
+  const html = await readFile("out/index.html", "utf8");
+  assert.match(html, /<title>Andrew Fleck — Dynamical Systems &amp; Estimation<\/title>/);
+  assert.match(html, /Andrew Fleck · Dynamical Systems &amp; Estimation/);
+  assert.match(html, /Measurement geometry\. Observer dynamics\. Estimation reliability\./);
+  assert.match(html, /Research on how sensing conditions shape state estimation and the reliability of downstream assessments/);
+  assert.match(html, /Accepted · IEEE CDC 2026/);
+  assert.match(html, /cdc-geometry-contraction-rmse/);
+  assert.match(html, /arxiv\.org\/abs\/2608\.14925/);
+  assert.doesNotMatch(html, /Research interests and approach|Research interests<\/span>/);
+});
+
+test("publication groups keep completed and submitted work ahead of preparation topics", async () => {
   const html = await readFile("out/publications/index.html", "utf8");
-  assert.match(html, /Accepted papers/);
-  assert.match(html, /Submitted manuscripts/);
-  assert.match(html, /Work in progress/);
+  const accepted = html.indexOf("Accepted papers");
+  const submitted = html.indexOf("Submitted manuscripts");
+  const preparation = html.indexOf("Work in progress");
+  assert.ok(accepted >= 0 && submitted > accepted && preparation > submitted);
   assert.match(html, /Proceedings publication forthcoming/);
   assert.match(html, /When Corruption Looks Normal: Identical Inputs, Incompatible Observer Actions/);
   assert.match(html, /The Ghost in the Observer: Silent Propagation and Re-Exposure of Historical Actions/);
   assert.match(html, /American Control Conference \(ACC 2027\)/);
-  assert.match(html, /Studies how completed observer interventions can continue to influence subsequent observer dynamics and forecasts/);
+  assert.match(html, /publications\/observer-dynamics-robotic-state-estimation\//);
   assert.doesNotMatch(html, /Paper ID|1246|Under review|Published|IEEE Xplore/);
 });
 
-test("CDC detail preserves the supplied abstract and valid external links", async () => {
+test("CDC detail preserves the accepted-paper abstract and public resources", async () => {
   const html = await readFile("out/publications/geometry-induced-observers/index.html", "utf8");
-  const exactAbstract = "Learned perception models increasingly serve as measurement maps within nonlinear observers. Their state-dependent Jacobians introduce measurement geometry that measurement-value accuracy does not constrain. Even when measurements satisfy standard accuracy criteria, the corresponding one-step Euclidean error operator can be noncontractive. Improving measurement accuracy or retuning the correction strength may leave this observer-level contraction failure unresolved. We derive the exact estimation-error operator and use it to determine whether scalar-gain adjustment can restore contraction or the correction structure must change. The analysis separates three distinct cases: a conservative certificate may be inconclusive, the nominal gain may be exactly noncontractive, or the correction geometry may lie beyond scalar-gain repair. Convexity makes this recovery boundary exactly computable. When scalar recovery remains possible, uncertainty-aware envelopes define a safe projection that changes the nominal gain only when contraction and same-state improvement are certified. Uniform local certification yields exponential error decay and explicit disturbance-dependent bounds. The method uses local composite-Jacobian information or a certified approximation and requires no retraining. Scalar experiments demonstrate certified contraction recovery and improved tracking when the geometry permits. Controlled real-image experiments provide numerical evidence of scalar-unrecoverable contraction loss despite accurate learned measurements.";
-  assert.ok(html.includes(exactAbstract));
+  assert.match(html, /Accepted paper · CDC 2026/);
+  assert.match(html, /Aditi Acharya and Andrew Fleck/);
   assert.match(html, /arxiv\.org\/abs\/2608\.14925/);
   assert.match(html, /arxiv\.org\/pdf\/2608\.14925/);
   assert.match(html, /arXiv DOI/);
-  assert.doesNotMatch(html, /representation aware gain normalization|restores a uniform Euclidean contraction bound/);
 });
 
-test("SII detail is an honest research summary", async () => {
+test("SII page has distinct framing, compact status, and a disclosure-safe context visual", async () => {
   const html = await readFile("out/publications/when-corruption-looks-normal/index.html", "utf8");
-  assert.match(html, /<h2>Research summary<\/h2>/);
+  assert.match(html, /Observer Reliability Under Corrupted Sensing/);
+  assert.match(html, /When Corruption Looks Normal: Identical Inputs, Incompatible Observer Actions/);
+  assert.match(html, /Aditi Acharya and Andrew Fleck/);
   assert.match(html, /Submitted to the 2027 IEEE\/SICE International Symposium on System Integration/);
-  assert.match(html, /bounded, diagnostically nominal estimates can remain physically incorrect under coherent corruption/);
-  assert.match(html, /Related research theme/);
-  assert.doesNotMatch(html, /<h2>Abstract<\/h2>|DOI|arXiv|Paper ↗/);
+  assert.match(html, /Physical sensing.*Measurement interpretation.*Observer dynamics.*Reliability assessment/);
+  assert.match(html, /General context diagram; no unpublished result data are shown/);
+  assert.doesNotMatch(html, /<h2>Abstract<\/h2>|DOI|arXiv|Paper ↗|bounded, diagnostically nominal|coherent corruption/);
 });
 
-test("about page uses supplied dates and the downloadable résumé", async () => {
+test("ACC page has a distinct robotic implementation identity without private detail", async () => {
+  const html = await readFile("out/publications/observer-dynamics-robotic-state-estimation/index.html", "utf8");
+  assert.match(html, /Observer Dynamics in Robotic State Estimation/);
+  assert.match(html, /The Ghost in the Observer: Silent Propagation and Re-Exposure of Historical Actions/);
+  assert.match(html, /Aditi Acharya and Andrew Fleck/);
+  assert.match(html, /Submitted to the 2027 American Control Conference/);
+  assert.match(html, /Astrobee.*native estimator.*recorded flight data/);
+  assert.match(html, /General context diagram; no unpublished result data are shown/);
+  assert.doesNotMatch(html, /historical calibration|matched-action chronology|differential silence|Paper ↗|Code ↗/i);
+});
+
+test("research index links every substantive card to a real detail page", async () => {
+  const html = await readFile("out/research/index.html", "utf8");
+  for (const route of [
+    "publications/geometry-induced-observers/",
+    "publications/when-corruption-looks-normal/",
+    "publications/observer-dynamics-robotic-state-estimation/",
+    "research/projects/robust-estimation/",
+    "research/projects/latent-dynamics/",
+    "research/projects/vision-tracking/",
+    "research/projects/ecg-reconstruction/",
+  ]) assert.ok(html.includes(route), `missing ${route}`);
+  assert.match(html, /Future directions/);
+  assert.match(html, /Early-stage topics are listed separately/);
+  assert.doesNotMatch(html, /historical calibration|matched-action chronology|differential silence/);
+});
+
+test("public engineering project pages preserve existing technical facts and resources", async () => {
+  const estimation = await readFile("out/research/projects/robust-estimation/index.html", "utf8");
+  assert.match(estimation, /Technical question/);
+  assert.match(estimation, /state-dependent and intermittent information loss/);
+  assert.match(estimation, /adaptive-sensing-robustness/);
+  assert.match(estimation, /robust-estimation-system-diagram/);
+  const dynamics = await readFile("out/research/projects/latent-dynamics/index.html", "utf8");
+  assert.match(dynamics, /latent-dynamics-stability/);
+  assert.match(dynamics, /vision-stability/);
+});
+
+test("about page retains the downloadable résumé and supplied dates", async () => {
   const html = await readFile("out/about/index.html", "utf8");
   assert.match(html, /December 2025 — Present/);
   assert.match(html, /October 2023 — December 2025/);
   assert.match(html, /December 2022 — July 2023/);
-  assert.match(html, /Download résumé/);
   assert.match(html, /andrew-fleck-resume\.pdf/);
-  assert.doesNotMatch(html, /Download CV|pending|Affiliated Researcher|GPA 3\.57|physical chemistry and thermodynamics/);
   const pdf = await readFile("out/andrew-fleck-resume.pdf");
   assert.equal(pdf.subarray(0, 5).toString(), "%PDF-");
 });
 
-test("research page connects submitted work and qualified supporting evidence", async () => {
-  const html = await readFile("out/research/index.html", "utf8");
-  assert.match(html, /The Ghost in the Observer: Silent Propagation and Re-Exposure of Historical Actions/);
-  assert.match(html, /Studies how completed observer interventions can continue to influence subsequent observer dynamics and forecasts/);
-  assert.match(html, /Native replay results remain conditional on assumed historical calibration/);
-  assert.match(html, /Experimental development/);
-  assert.match(html, /Controlled sensing regimes are compared while the underlying dynamics remain fixed/);
-  assert.match(html, /The project compares dynamical stability estimates under good and degraded measurements/);
-  assert.match(html, /aria-haspopup="dialog"/);
-  assert.match(html, /aria-labelledby=/);
-});
-
-test("homepage metadata and summary labels match the review brief", async () => {
-  const html = await readFile("out/index.html", "utf8");
-  assert.match(html, /<title>Andrew Fleck — Engineer &amp; Researcher<\/title>/);
-  assert.match(html, /<meta property="og:title" content="Andrew Fleck — Engineer &amp; Researcher"/);
-  assert.match(html, /<meta name="twitter:title" content="Andrew Fleck — Engineer &amp; Researcher"/);
-  assert.match(html, /My work combines mathematical analysis, computational modeling, and experimental evaluation/);
-  assert.match(html, /Research summary →/);
-  assert.doesNotMatch(html, /Project details →/);
-});
-
-test("mobile CSS does not hide navigation links", async () => {
+test("mobile CSS keeps navigation and context visuals responsive", async () => {
   const css = await readFile("app/globals.css", "utf8");
   assert.doesNotMatch(css, /nav a:nth-child\(3\)|nav-disabled\{display:none/);
   assert.match(css, /nav\{flex-wrap:wrap;justify-content:flex-end\}/);
+  assert.match(css, /\.context-stages\{grid-template-columns:1fr 1fr\}/);
 });

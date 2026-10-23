@@ -59,16 +59,14 @@ const themes = [
       {
         kind: "publication",
         index: 1,
-        label: "Research paper · IEEE/SICE SII 2027",
-        summary: "Characterizes when histories indistinguishable through a scheduler’s available information require incompatible observer actions. Experiments examine how bounded, diagnostically nominal estimates can remain physically incorrect under coherent corruption.",
+        label: "Submitted manuscript · IEEE/SICE SII 2027",
+        summary: "Studies observer reliability across physical sensing, measurement interpretation, observer dynamics, configurable correction, and downstream reliability assessment.",
       },
       {
         kind: "publication",
         index: 2,
         label: "Submitted manuscript · ACC 2027",
-        summary: "Studies how completed observer interventions can continue to influence subsequent observer dynamics and forecasts, including silent propagation and later re-exposure of their effects.",
-        development: "Native Astrobee replay remains an experimental line of development supporting the theoretical analysis; it is not presented as completed validation of the submitted manuscript.",
-        note: "Native replay results remain conditional on assumed historical calibration and do not yet establish the complete matched-action chronology of differential silence and re-exposure.",
+        summary: "Extends the observer-reliability project into robotic state estimation using Astrobee's native estimator and recorded flight data.",
       },
       {
         kind: "project",
@@ -87,23 +85,11 @@ const themes = [
     question: "How can physical dynamics and known forcing support state reconstruction and dynamical analysis from sparse, noisy observations?",
     items: [
       {
-        kind: "publication",
-        index: 3,
-        label: "Ongoing research · Geophysical reconstruction",
-        summary: "Developing a physics-structured approach to sea-surface-temperature reconstruction under sparse observations, time-varying sensing, and known external forcing.",
-      },
-      {
         kind: "project",
         index: 1,
         label: "Computational study · Dynamical inference",
         displayTitle: "Stability Analysis from Partial Observations",
         summary: "The project compares dynamical stability estimates under good and degraded measurements, examining whether observation quality changes the apparent timing and character of system transitions.",
-      },
-      {
-        kind: "publication",
-        index: 4,
-        label: "Ongoing research · Operator-based analysis",
-        summary: "Investigates operator-based approaches to stability assessment for forced geophysical systems under partial observation.",
       },
     ],
   },
@@ -171,8 +157,6 @@ export default function Research() {
                     {publication.authors && <p className="theme-item-authors">{publication.authors}</p>}
                     {publication.detail && <p className="theme-item-detail">{publication.detail}</p>}
                     <p>{item.summary}</p>
-                    {"development" in item && <p className="research-scope-note"><strong>Experimental development.</strong> {item.development}</p>}
-                    {"note" in item && <p className="research-scope-note">{item.note}</p>}
                     {(publicationHref || publication.paper) && <div className="theme-item-actions">{publicationHref && <Link className="theme-item-link" href={publicationHref}>Publication details →</Link>}{publication.paper && <a className="theme-item-link" href={publication.paper} target="_blank" rel="noopener noreferrer">Paper ↗</a>}</div>}
                   </div>
                   {visual && <ProjectFigure visual={visual}/>}
@@ -181,12 +165,13 @@ export default function Research() {
 
               const project = projects[item.index];
               const visual = projectVisuals[item.index];
+              const projectHref = `/research/projects/${project.slug}`;
               return <article className={`theme-item theme-project${visual ? " has-visual" : ""}`} id={project.slug} key={project.slug}>
                 <div className="theme-item-content">
                   <p className="theme-item-kicker">{item.label}</p>
-                  <h4>{item.displayTitle}</h4>
+                  <h4><Link href={projectHref}>{item.displayTitle}</Link></h4>
                   <p>{item.summary}</p>
-                  {project.repo && <div className="theme-item-actions"><a className="theme-item-link" href={project.repo} target="_blank" rel="noopener noreferrer">Code repository ↗</a></div>}
+                  <div className="theme-item-actions"><Link className="theme-item-link" href={projectHref}>Project details →</Link>{project.repo && <a className="theme-item-link" href={project.repo} target="_blank" rel="noopener noreferrer">Code repository ↗</a>}</div>
                 </div>
                 {visual && <ProjectFigure visual={visual}/>}
               </article>;
@@ -195,5 +180,9 @@ export default function Research() {
         </div>
       </div>
     </section>)}</div>
+    <section className="future-directions" aria-labelledby="future-directions-title">
+      <p className="section-code">Future directions</p>
+      <div><h2 id="future-directions-title">Work in preparation</h2><p>Early-stage topics are listed separately from completed projects and submitted manuscripts.</p><ul>{publications.filter((publication) => publication.status === "In preparation").map((publication) => <li key={publication.title}>{publication.title}</li>)}</ul></div>
+    </section>
   </Shell>;
 }

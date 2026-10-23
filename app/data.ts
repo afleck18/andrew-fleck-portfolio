@@ -1,7 +1,7 @@
 export const site = {
   name: "Andrew Fleck",
   location: "West Lafayette, Indiana",
-  title: "Engineer & Researcher",
+  title: "Dynamical Systems & Estimation",
   links: { email: "mailto:afleck18@gmail.com", github: "https://github.com/afleck18", linkedin: "https://www.linkedin.com/in/andrewfleck" },
 };
 
@@ -22,7 +22,7 @@ export const projects = [
     validation: "Compares covariance-derived uncertainty, residual disagreement, observation-derived stability estimates, and risk indicators while holding the dynamics constant.",
     significance: "Degraded sensing produces a growing separation between realized estimation error and covariance-based confidence, while also increasing variability in stability estimates derived from the reconstructed trajectory. The results show why estimator accuracy and the reliability of estimator-derived diagnostics must be evaluated separately.",
     homeTitle: "Estimator reliability under degraded sensing",
-    homeSummary: "A controlled study of how sensing degradation affects estimation error, uncertainty measures, and reliability assessment.",
+    homeSummary: "Controls the nonlinear dynamics while varying the observation process to compare realized error, covariance-based confidence, and observation-derived stability assessment.",
     repo: "https://github.com/afleck18/adaptive-sensing-robustness",
   },
   {
@@ -35,7 +35,7 @@ export const projects = [
     validation: "Compares dynamics-based stability assessment with statistical warning indicators including variance and autocorrelation.",
     significance: "Examines what stability information remains recoverable when sensing is incomplete and the system is forced.",
     homeTitle: "Stability analysis from partial observations",
-    homeSummary: "Investigates how measurement quality affects estimates of dynamical stability and the detection of changes in system behavior.",
+    homeSummary: "Compares dynamics-based stability assessment with statistical warning indicators under partial, noisy measurement and external forcing.",
     repo: "https://github.com/afleck18/latent-dynamics-stability",
   },
   {
@@ -48,7 +48,7 @@ export const projects = [
     validation: "Uses probabilistic trajectory estimation and filtering to reason about association and observation uncertainty.",
     significance: "Connects learning-enabled sensing to state estimation in environmental and hybrid biological systems.",
     homeTitle: "Vision-based state estimation and tracking",
-    homeSummary: "Combines visual measurements with probabilistic filtering to estimate trajectories from RGB and thermal video.",
+    homeSummary: "Combines YOLOv8 segmentation, ByteTrack, Kalman filtering, assignment, and gating to estimate trajectories from RGB and thermal video.",
     repo: null,
   },
   {
@@ -61,7 +61,7 @@ export const projects = [
     validation: "Evaluates image-processing choices by their ability to preserve the structure of the underlying waveform.",
     significance: "Frames document-image processing around recovery of a physical signal rather than image appearance alone.",
     homeTitle: "ECG waveform reconstruction",
-    homeSummary: "Reconstructs physiological waveforms from scanned ECG images using image processing and filtering.",
+    homeSummary: "Treats scanned-ECG recovery as an inverse imaging problem, evaluating processing choices by their preservation of physiological waveform structure.",
     repo: null,
   },
 ];
@@ -75,6 +75,7 @@ export const publications = [
     venue: "65th IEEE Conference on Decision and Control (CDC 2026)",
     status: "Accepted",
     detail: "Proceedings publication forthcoming",
+    summary: "Derives the observer error operator induced by learned measurement geometry, identifies when scalar-gain repair is possible, and develops uncertainty-aware contraction certification.",
     paper: "https://arxiv.org/abs/2608.14925",
     pdf: "https://arxiv.org/pdf/2608.14925",
     doi: "https://doi.org/10.48550/arXiv.2608.14925",
@@ -87,18 +88,19 @@ export const publications = [
     venue: "Submitted to the 2027 IEEE/SICE International Symposium on System Integration (SII 2027).",
     status: "Submitted",
     detail: null,
+    summary: "Studies observer reliability across physical sensing, measurement interpretation, observer dynamics, configurable correction, and downstream reliability assessment.",
     paper: null,
     pdf: null,
     doi: null,
   },
   {
-    slug: null,
+    slug: "observer-dynamics-robotic-state-estimation",
     anchor: "ghost-in-the-observer",
     title: "The Ghost in the Observer: Silent Propagation and Re-Exposure of Historical Actions",
     authors: "Aditi Acharya and Andrew Fleck",
     venue: "American Control Conference (ACC 2027)",
     status: "Submitted",
-    summary: "Studies how completed observer interventions can continue to influence subsequent observer dynamics and forecasts, including silent propagation and later re-exposure of their effects.",
+    summary: "Studies observer dynamics in a robotic state-estimation setting using Astrobee's native estimator and recorded flight data.",
     detail: null,
     paper: null,
     pdf: null,

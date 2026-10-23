@@ -3,18 +3,19 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Shell } from "./components";
 import { projects, publications } from "./data";
+import cdcGeometryContraction from "../public/cdc-geometry-contraction-rmse.png";
 import systemDiagram from "../public/robust-estimation-system-diagram.png";
 import visionStability from "../public/vision-stability.png";
 
 const base = process.env.NEXT_PUBLIC_SITE_URL || "https://afleck18.github.io/andrew-fleck-portfolio";
-const homeTitle = "Andrew Fleck — Engineer & Researcher";
-const homeDescription = "Research in nonlinear control, state estimation, learning-enabled sensing, and partially observed dynamical systems.";
+const homeTitle = "Andrew Fleck — Dynamical Systems & Estimation";
+const homeDescription = "Research on how sensing conditions shape state estimation, observer dynamics, and the reliability of downstream assessments.";
 export const metadata: Metadata = { title: { absolute: homeTitle }, description: homeDescription, alternates: { canonical: `${base}/` }, openGraph: { title: homeTitle, description: homeDescription, url: `${base}/`, type: "website" }, twitter: { card: "summary", title: homeTitle, description: homeDescription } };
 
-const publicationSummaries = [
-  "Examines how learned measurement geometry affects observer contraction, characterizes when scalar-gain adjustment can recover it, and develops uncertainty-aware certification for gain intervention.",
-  "Studies when histories that are indistinguishable through an observer’s available information require incompatible next actions.",
-];
+const publicationSummaries: Record<string, string> = {
+  "when-corruption-looks-normal": "Examines observer reliability across physical sensing, measurement interpretation, observer dynamics, configurable correction, and downstream assessment.",
+  "observer-dynamics-robotic-state-estimation": "Extends the observer-reliability program into a robotic implementation context using Astrobee's native estimator and recorded flight data.",
+};
 
 const projectVisuals: Record<string, { src: StaticImageData; alt: string }> = {
   "robust-estimation": {
@@ -28,51 +29,40 @@ const projectVisuals: Record<string, { src: StaticImageData; alt: string }> = {
 };
 
 export default function Home() {
-  const selectedPublications = publications.slice(0, 2);
+  const cdc = publications[0];
+  const submittedPublications = publications.slice(1, 3);
 
   return <Shell>
     <section className="engineering-hero">
       <div className="hero-copy">
-        <p className="system-label">Andrew Fleck / Engineer & Researcher</p>
-        <h1>Understanding dynamical systems from partial observations.</h1>
-        <p>I develop methods for estimating and analyzing physical systems from incomplete or uncertain measurements, with interests in nonlinear dynamics, control, robustness, and sensing.</p>
+        <p className="system-label">Andrew Fleck · Dynamical Systems &amp; Estimation</p>
+        <h1>Measurement geometry. Observer dynamics. Estimation reliability.</h1>
+        <p>Research on how sensing conditions shape state estimation and the reliability of downstream assessments. Mathematical analysis and computational experiments connect measurement geometry to observer contraction, estimation error, and uncertainty characterization.</p>
         <div className="actions"><Link className="button" href="/research">View research</Link><Link className="text-link" href="/publications">Publications <span aria-hidden="true">→</span></Link></div>
       </div>
-      <aside className="hero-console" aria-labelledby="research-interests-title">
-        <div className="console-top"><span id="research-interests-title">Research interests</span></div>
-        <dl>
-          <div><dt>01</dt><dd>Nonlinear dynamics and control</dd></div>
-          <div><dt>02</dt><dd>State estimation and observer design</dd></div>
-          <div><dt>03</dt><dd>Robustness and sensing uncertainty</dd></div>
-          <div><dt>04</dt><dd>Inverse problems and physical modeling</dd></div>
-        </dl>
-        <div className="console-equation" role="img" aria-label="Measurement model: y sub t equals h of x sub t plus v sub t">
-          y<sub>t</sub> = h(x<sub>t</sub>) + v<sub>t</sub><span>Measurement model</span>
+      <aside className="featured-paper" aria-labelledby="featured-cdc-title">
+        <div className="featured-paper-visual"><Image src={cdcGeometryContraction} alt="Sensitivity, contraction-certificate, and observer-RMSE figure from the accepted CDC paper" sizes="(max-width: 950px) min(100vw - 64px, 620px), 420px" priority unoptimized /></div>
+        <div className="featured-paper-body">
+          <p className="publication-meta">Accepted · IEEE CDC 2026</p>
+          <h2 id="featured-cdc-title"><Link href={`/publications/${cdc.slug}`}>{cdc.title}</Link></h2>
+          <p className="featured-paper-authors">{cdc.authors}</p>
+          <p>Derives the observer error operator induced by learned measurement geometry, identifies when scalar-gain repair is possible, and develops uncertainty-aware contraction certification.</p>
+          <div className="home-card-actions"><Link href={`/publications/${cdc.slug}`}>Paper details →</Link><a href={cdc.paper!} target="_blank" rel="noopener noreferrer">Paper ↗</a></div>
         </div>
       </aside>
     </section>
 
-    <section className="bio-strip">
-      <p className="section-code">00 / Profile</p>
-      <div>
-        <h2>Research interests and approach</h2>
-        <p>My work combines mathematical analysis, computational modeling, and experimental evaluation. I am particularly interested in estimation problems in aerospace, robotics, and environmental sensing.</p>
-        <div className="profile-facts"><span>B.S. Biomedical Engineering, Purdue University</span><span>Based in West Lafayette, Indiana</span></div>
-        <Link className="text-link profile-link" href="/about">About and experience <span aria-hidden="true">→</span></Link>
-      </div>
-    </section>
-
     <section className="home-publications">
-      <div className="home-section-heading"><p className="section-code">01 / Selected publications</p><div><h2>Selected publications</h2><p>Peer-reviewed and submitted work in nonlinear observation and information-constrained estimation.</p></div></div>
-      <div className="home-publication-list">{selectedPublications.map((publication, index) => {
-        const href = publication.slug ? `/publications/${publication.slug}` : `/publications/#${publication.anchor}`;
-        const status = index === 0 ? "Accepted · IEEE CDC 2026" : "Submitted · IEEE/SICE SII 2027";
+      <div className="home-section-heading"><p className="section-code">01 / Submitted manuscripts</p><div><h2>Submitted manuscripts</h2><p>Current work extending observer reliability into corrupted-sensing and robotic state-estimation contexts.</p></div></div>
+      <div className="home-publication-list">{submittedPublications.map((publication) => {
+        const href = `/publications/${publication.slug}`;
+        const status = publication.venue?.includes("SII") ? "Submitted · IEEE/SICE SII 2027" : "Submitted · ACC 2027";
         return <article className="home-publication" key={publication.title}>
           <p className="publication-meta">{status}</p>
           <h3><Link href={href}>{publication.title}</Link></h3>
           <p className="home-publication-authors">{publication.authors}</p>
           {publication.detail && <p className="home-publication-detail">{publication.detail}</p>}
-          <p className="home-publication-summary">{publicationSummaries[index]}</p>
+          <p className="home-publication-summary">{publicationSummaries[publication.slug!]}</p>
           <div className="home-card-actions"><Link href={href}>Publication details →</Link>{publication.paper && <a href={publication.paper} target="_blank" rel="noopener noreferrer">Paper ↗</a>}</div>
         </article>;
       })}</div>
@@ -82,7 +72,7 @@ export default function Home() {
     <section className="work-section">
       <div className="home-section-heading"><p className="section-code">02 / Selected projects</p><div><h2>Selected projects</h2><p>Projects exploring estimation, sensing, and reconstruction through computational and experimental work.</p></div></div>
       <div className="selected-project-grid">{projects.map((project) => {
-        const detailHref = `/research/#${project.slug}`;
+        const detailHref = `/research/projects/${project.slug}`;
         const visual = projectVisuals[project.slug];
         return <article className={`selected-project-card${visual ? " has-project-visual" : ""}`} key={project.slug}>
           {visual && <Link className="selected-project-visual" href={detailHref} aria-label={`View details for ${project.homeTitle}`}><Image src={visual.src} alt={visual.alt} sizes="(max-width: 700px) calc(100vw - 28px), 460px" unoptimized/></Link>}
