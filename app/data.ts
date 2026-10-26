@@ -59,7 +59,7 @@ export const publications = [
     anchor: "when-corruption-looks-normal",
     title: "When Corruption Looks Normal: Identical Inputs, Incompatible Observer Actions",
     authors: "Aditi Acharya and Andrew Fleck",
-    venue: "Submitted to the 2027 IEEE/SICE International Symposium on System Integration (SII 2027).",
+    venue: "2027 IEEE/SICE International Symposium on System Integration (SII 2027)",
     status: "Submitted",
     detail: null,
     summary: "Studies observer reliability across physical sensing, measurement interpretation, observer dynamics, configurable correction, and downstream reliability assessment.",
@@ -80,14 +80,12 @@ export const publications = [
     pdf: null,
     doi: null,
   },
-  { slug: null, anchor: null, title: "State Estimation in Non-Stationary Geophysical Systems under Forcing and Sparse Sensing", authors: null, venue: null, status: "In preparation", detail: null, paper: null, pdf: null, doi: null },
-  { slug: null, anchor: null, title: "Operator-Based Stability Certification for Partially Observed, Forced Geophysical Systems", authors: null, venue: null, status: "In preparation", detail: null, paper: null, pdf: null, doi: null },
 ];
 
 export const futureDirection = {
-  title: "Geophysical State Reconstruction and Stability Assessment",
+  title: "Geophysical State Estimation and Stability Under Forcing and Sparse Sensing",
   status: "Future direction",
-  summary: "Exploring physics-structured state reconstruction and stability assessment for non-stationary geophysical systems under forcing and sparse sensing.",
+  summary: "This direction combines physics-structured reconstruction of non-stationary geophysical states from sparse observations under external forcing with stability assessment of the reconstructed dynamics.",
 };
 
 export const capabilities = [

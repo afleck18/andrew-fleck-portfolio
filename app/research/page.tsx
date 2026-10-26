@@ -55,14 +55,14 @@ const themes = [
       {
         kind: "publication",
         index: 1,
-        label: "Submitted manuscript · IEEE/SICE SII 2027",
+        label: "Submitted · SII 2027",
         displayTitle: "Observer Reliability Under Corrupted Sensing",
         summary: "Studies observer reliability across physical sensing, measurement interpretation, observer dynamics, configurable correction, and downstream reliability assessment.",
       },
       {
         kind: "publication",
         index: 2,
-        label: "Submitted manuscript · ACC 2027",
+        label: "Submitted · ACC 2027",
         displayTitle: "Observer Dynamics in Robotic State Estimation",
         summary: "Extends the observer-reliability project into robotic state estimation using Astrobee's native estimator and recorded flight data.",
       },
@@ -127,7 +127,7 @@ export default function Research() {
                 return <article className={`theme-item theme-project${visual ? " has-visual" : ""}`} key={publication.title}>
                   <div className="theme-item-content">
                     <p className="theme-item-kicker">{item.label}</p>
-                    <span className={`status ${statusClass(publication.status)}`}>{publication.status}</span>
+                    {publication.status !== "Submitted" && <span className={`status ${statusClass(publication.status)}`}>{publication.status}</span>}
                     <h4>{publicationHref ? <Link href={publicationHref}>{"displayTitle" in item ? item.displayTitle : publication.title}</Link> : publication.title}</h4>
                     {publication.authors && <p className="theme-item-authors">{publication.authors}</p>}
                     {publication.detail && <p className="theme-item-detail">{publication.detail}</p>}

@@ -48,19 +48,17 @@ test("homepage uses the requested opening and foregrounds the accepted CDC paper
   assert.doesNotMatch(html, /Research interests and approach|Research interests<\/span>/);
 });
 
-test("publication groups restore accepted, submitted, and work-in-progress detail", async () => {
+test("publication groups contain accepted and submitted work without duplicate status wording", async () => {
   const html = await readFile("out/publications/index.html", "utf8");
   const accepted = html.indexOf("Accepted papers");
   const submitted = html.indexOf("Submitted manuscripts");
-  const preparation = html.indexOf("Work in progress");
-  assert.ok(accepted >= 0 && submitted > accepted && preparation > submitted);
+  assert.ok(accepted >= 0 && submitted > accepted);
   assert.match(html, /Proceedings publication forthcoming/);
   assert.match(html, /When Corruption Looks Normal: Identical Inputs, Incompatible Observer Actions/);
   assert.match(html, /The Ghost in the Observer: Silent Propagation and Re-Exposure of Historical Actions/);
   assert.match(html, /American Control Conference \(ACC 2027\)/);
   assert.match(html, /publications\/observer-dynamics-robotic-state-estimation\//);
-  assert.match(html, /State Estimation in Non-Stationary Geophysical Systems under Forcing and Sparse Sensing/);
-  assert.match(html, /Operator-Based Stability Certification for Partially Observed, Forced Geophysical Systems/);
+  assert.doesNotMatch(html, /Work in progress|State Estimation in Non-Stationary Geophysical Systems under Forcing and Sparse Sensing|Operator-Based Stability Certification for Partially Observed, Forced Geophysical Systems|Submitted to/);
   assert.match(html, /Derives the observer error operator induced by learned measurement geometry/);
   assert.doesNotMatch(html, /Paper ID|1246|Under review|Published|IEEE Xplore/);
 });
@@ -79,7 +77,8 @@ test("SII page has distinct framing, compact status, and a disclosure-safe conte
   assert.match(html, /Observer Reliability Under Corrupted Sensing/);
   assert.match(html, /When Corruption Looks Normal: Identical Inputs, Incompatible Observer Actions/);
   assert.match(html, /Aditi Acharya and Andrew Fleck/);
-  assert.match(html, /Submitted to the 2027 IEEE\/SICE International Symposium on System Integration/);
+  assert.match(html, /2027 IEEE\/SICE International Symposium on System Integration \(SII 2027\)/);
+  assert.match(html, /<dt>Venue<\/dt>.*<dt>Status<\/dt><dd>Submitted<\/dd>/);
   assert.match(html, /Physical sensing.*Measurement interpretation.*Observer dynamics.*Reliability assessment/);
   assert.match(html, /General context diagram; no unpublished result data are shown/);
   assert.doesNotMatch(html, /<h2>Abstract<\/h2>|DOI|arXiv|Paper ↗|bounded, diagnostically nominal|coherent corruption/);
@@ -90,7 +89,7 @@ test("ACC page has a distinct robotic implementation identity without private de
   assert.match(html, /Observer Dynamics in Robotic State Estimation/);
   assert.match(html, /The Ghost in the Observer: Silent Propagation and Re-Exposure of Historical Actions/);
   assert.match(html, /Aditi Acharya and Andrew Fleck/);
-  assert.match(html, /Submitted to the 2027 American Control Conference/);
+  assert.match(html, /<dt>Venue<\/dt><dd>ACC 2027<\/dd>.*<dt>Status<\/dt><dd>Submitted<\/dd>/);
   assert.match(html, /Astrobee.*native estimator.*recorded flight data/);
   assert.match(html, /General context diagram; no unpublished result data are shown/);
   assert.doesNotMatch(html, /historical calibration|matched-action chronology|differential silence|Paper ↗|Code ↗/i);
@@ -106,8 +105,11 @@ test("research index links every substantive card to a real detail page", async 
     "research/projects/latent-dynamics/",
   ]) assert.ok(html.includes(route), `missing ${route}`);
   assert.match(html, /Future directions/);
-  assert.match(html, /Geophysical State Reconstruction and Stability Assessment/);
-  assert.match(html, /physics-structured state reconstruction and stability assessment/);
+  assert.match(html, /Geophysical State Estimation and Stability Under Forcing and Sparse Sensing/);
+  assert.match(html, /This direction combines physics-structured reconstruction of non-stationary geophysical states from sparse observations under external forcing with stability assessment of the reconstructed dynamics/);
+  assert.match(html, /Submitted · SII 2027/);
+  assert.match(html, /Submitted · ACC 2027/);
+  assert.doesNotMatch(html, /Submitted manuscript/);
   assert.doesNotMatch(html, /Vision-Based State Estimation|ECG Waveform Reconstruction|research\/projects\/(?:vision-tracking|ecg-reconstruction)\/|Non-Stationary Geophysical Systems|Operator-Based Stability Certification|historical calibration|matched-action chronology|differential silence/);
 });
 

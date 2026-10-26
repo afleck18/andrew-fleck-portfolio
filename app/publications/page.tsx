@@ -12,7 +12,7 @@ const groups = [
   { title: "Accepted papers", entries: publications.filter((publication) => publication.status === "Accepted") },
   { title: "Submitted manuscripts", entries: publications.filter((publication) => publication.status === "Submitted") },
   { title: "Work in progress", entries: publications.filter((publication) => publication.status === "In preparation") },
-];
+].filter((group) => group.entries.length > 0);
 
 export default function Publications() {
   return <Shell>
