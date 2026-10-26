@@ -130,6 +130,9 @@ test("about page restores the fuller experience, education, capabilities, dates,
   assert.match(html, /October 2023 — December 2025/);
   assert.match(html, /December 2022 — July 2023/);
   assert.match(html, /vision-based sensing and probabilistic tracking pipelines for RGB and thermal video/);
+  assert.match(html, /estimate pig trajectories and quantify drinking, eating, and sleeping activity/);
+  assert.match(html, /audio filtering to isolate aggression periods/);
+  assert.match(html, /model predicting PM2\.5 from local measurements/);
   assert.match(html, /ECG waveform reconstruction from scanned images as an inverse imaging problem/);
   assert.match(html, /Analysis and modeling/);
   assert.match(html, /Sensing and reconstruction/);

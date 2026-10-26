@@ -32,7 +32,7 @@ export default function About() {
           <time>October 2023 — December 2025</time>
           <h2>Research Assistant</h2>
           <p className="timeline-subtitle">Verma Lab · Purdue University</p>
-          <p className="timeline-description">Developed vision-based sensing and probabilistic tracking pipelines for RGB and thermal video, integrating learned perception with filtering and trajectory estimation. Additional work addressed inverse imaging, signal reconstruction, and environmental sensing data.</p>
+          <p className="timeline-description">Developed vision-based sensing and probabilistic tracking pipelines for RGB and thermal video, integrating learned perception and filtering to estimate pig trajectories and quantify drinking, eating, and sleeping activity. Also used audio filtering to isolate aggression periods and processed national and international environmental data for a model predicting PM2.5 from local measurements.</p>
           <p className="timeline-note">Presented “Spatiotemporal State Estimation and Multi-Object Tracking in Hybrid Biological Systems” at Purdue ABE IRS in 2024.</p>
         </article>
         <article>
