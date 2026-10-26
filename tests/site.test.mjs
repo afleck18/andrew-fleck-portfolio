@@ -8,8 +8,6 @@ const pages = [
   ["out/research/index.html", `${base}/research/`],
   ["out/research/projects/robust-estimation/index.html", `${base}/research/projects/robust-estimation/`],
   ["out/research/projects/latent-dynamics/index.html", `${base}/research/projects/latent-dynamics/`],
-  ["out/research/projects/vision-tracking/index.html", `${base}/research/projects/vision-tracking/`],
-  ["out/research/projects/ecg-reconstruction/index.html", `${base}/research/projects/ecg-reconstruction/`],
   ["out/publications/index.html", `${base}/publications/`],
   ["out/publications/geometry-induced-observers/index.html", `${base}/publications/geometry-induced-observers/`],
   ["out/publications/when-corruption-looks-normal/index.html", `${base}/publications/when-corruption-looks-normal/`],
@@ -31,6 +29,7 @@ test("static export contains complete navigation, privacy metadata, and canonica
 
 test("homepage uses the requested opening and foregrounds the accepted CDC paper", async () => {
   const html = await readFile("out/index.html", "utf8");
+  const main = html.match(/<main[^>]*>([\s\S]*?)<\/main>/)?.[1] || "";
   assert.match(html, /<title>Andrew Fleck — Dynamical Systems &amp; Estimation<\/title>/);
   assert.match(html, /Andrew Fleck · Dynamical Systems &amp; Estimation/);
   assert.match(html, /Measurement geometry\. Observer dynamics\. Estimation reliability\./);
@@ -38,10 +37,18 @@ test("homepage uses the requested opening and foregrounds the accepted CDC paper
   assert.match(html, /Accepted · IEEE CDC 2026/);
   assert.match(html, /cdc-geometry-contraction-rmse/);
   assert.match(html, /arxiv\.org\/abs\/2608\.14925/);
+  assert.match(html, /Observer Reliability Under Corrupted Sensing/);
+  assert.match(html, /Observer Dynamics in Robotic State Estimation/);
+  assert.match(html, /research\/projects\/robust-estimation\//);
+  assert.match(html, /research\/projects\/latent-dynamics\//);
+  assert.match(html, /02 \/ Selected projects/);
+  assert.match(html, /<h2>Selected projects<\/h2>/);
+  assert.doesNotMatch(main, /Public projects/);
+  assert.doesNotMatch(main, /When Corruption Looks Normal: Identical Inputs|The Ghost in the Observer|research\/projects\/(?:vision-tracking|ecg-reconstruction)\//);
   assert.doesNotMatch(html, /Research interests and approach|Research interests<\/span>/);
 });
 
-test("publication groups keep completed and submitted work ahead of preparation topics", async () => {
+test("publication groups restore accepted, submitted, and work-in-progress detail", async () => {
   const html = await readFile("out/publications/index.html", "utf8");
   const accepted = html.indexOf("Accepted papers");
   const submitted = html.indexOf("Submitted manuscripts");
@@ -52,6 +59,9 @@ test("publication groups keep completed and submitted work ahead of preparation 
   assert.match(html, /The Ghost in the Observer: Silent Propagation and Re-Exposure of Historical Actions/);
   assert.match(html, /American Control Conference \(ACC 2027\)/);
   assert.match(html, /publications\/observer-dynamics-robotic-state-estimation\//);
+  assert.match(html, /State Estimation in Non-Stationary Geophysical Systems under Forcing and Sparse Sensing/);
+  assert.match(html, /Operator-Based Stability Certification for Partially Observed, Forced Geophysical Systems/);
+  assert.match(html, /Derives the observer error operator induced by learned measurement geometry/);
   assert.doesNotMatch(html, /Paper ID|1246|Under review|Published|IEEE Xplore/);
 });
 
@@ -94,12 +104,11 @@ test("research index links every substantive card to a real detail page", async 
     "publications/observer-dynamics-robotic-state-estimation/",
     "research/projects/robust-estimation/",
     "research/projects/latent-dynamics/",
-    "research/projects/vision-tracking/",
-    "research/projects/ecg-reconstruction/",
   ]) assert.ok(html.includes(route), `missing ${route}`);
   assert.match(html, /Future directions/);
-  assert.match(html, /Early-stage topics are listed separately/);
-  assert.doesNotMatch(html, /historical calibration|matched-action chronology|differential silence/);
+  assert.match(html, /Geophysical State Reconstruction and Stability Assessment/);
+  assert.match(html, /physics-structured state reconstruction and stability assessment/);
+  assert.doesNotMatch(html, /Vision-Based State Estimation|ECG Waveform Reconstruction|research\/projects\/(?:vision-tracking|ecg-reconstruction)\/|Non-Stationary Geophysical Systems|Operator-Based Stability Certification|historical calibration|matched-action chronology|differential silence/);
 });
 
 test("public engineering project pages preserve existing technical facts and resources", async () => {
@@ -113,14 +122,29 @@ test("public engineering project pages preserve existing technical facts and res
   assert.match(dynamics, /vision-stability/);
 });
 
-test("about page retains the downloadable résumé and supplied dates", async () => {
+test("about page restores the fuller experience, education, capabilities, dates, and résumé", async () => {
   const html = await readFile("out/about/index.html", "utf8");
   assert.match(html, /December 2025 — Present/);
   assert.match(html, /October 2023 — December 2025/);
   assert.match(html, /December 2022 — July 2023/);
+  assert.match(html, /vision-based sensing and probabilistic tracking pipelines for RGB and thermal video/);
+  assert.match(html, /ECG waveform reconstruction from scanned images as an inverse imaging problem/);
+  assert.match(html, /Analysis and modeling/);
+  assert.match(html, /Sensing and reconstruction/);
+  assert.match(html, /Engineering systems/);
   assert.match(html, /andrew-fleck-resume\.pdf/);
   const pdf = await readFile("out/andrew-fleck-resume.pdf");
   assert.equal(pdf.subarray(0, 5).toString(), "%PDF-");
+});
+
+test("removed project routes are absent from the export and sitemap", async () => {
+  const sitemap = await readFile("out/sitemap.xml", "utf8");
+  assert.doesNotMatch(sitemap, /vision-tracking|ecg-reconstruction/);
+  const home = await readFile("out/index.html", "utf8");
+  const research = await readFile("out/research/index.html", "utf8");
+  assert.doesNotMatch(home + research, /research\/projects\/(?:vision-tracking|ecg-reconstruction)\//);
+  await assert.rejects(readFile("out/research/projects/vision-tracking/index.html", "utf8"), { code: "ENOENT" });
+  await assert.rejects(readFile("out/research/projects/ecg-reconstruction/index.html", "utf8"), { code: "ENOENT" });
 });
 
 test("mobile CSS keeps navigation and context visuals responsive", async () => {

@@ -38,32 +38,6 @@ export const projects = [
     homeSummary: "Compares dynamics-based stability assessment with statistical warning indicators under partial, noisy measurement and external forcing.",
     repo: "https://github.com/afleck18/latent-dynamics-stability",
   },
-  {
-    slug: "vision-tracking",
-    number: "03",
-    title: "Vision-Based State Estimation and Tracking",
-    area: "Perception · multi-object tracking",
-    problem: "How can reliable trajectories be estimated from noisy RGB and thermal video observations?",
-    approach: "YOLOv8 instance segmentation and ByteTrack tracking, supported by Kalman filtering, Hungarian assignment, and Mahalanobis gating.",
-    validation: "Uses probabilistic trajectory estimation and filtering to reason about association and observation uncertainty.",
-    significance: "Connects learning-enabled sensing to state estimation in environmental and hybrid biological systems.",
-    homeTitle: "Vision-based state estimation and tracking",
-    homeSummary: "Combines YOLOv8 segmentation, ByteTrack, Kalman filtering, assignment, and gating to estimate trajectories from RGB and thermal video.",
-    repo: null,
-  },
-  {
-    slug: "ecg-reconstruction",
-    number: "04",
-    title: "ECG Inverse Waveform Reconstruction",
-    area: "Inverse imaging · signal preservation",
-    problem: "How can physiologically meaningful waveform dynamics be recovered from scanned ECG images?",
-    approach: "A senior thesis treating reconstruction as an inverse imaging problem with filtering under noise and distortion.",
-    validation: "Evaluates image-processing choices by their ability to preserve the structure of the underlying waveform.",
-    significance: "Frames document-image processing around recovery of a physical signal rather than image appearance alone.",
-    homeTitle: "ECG waveform reconstruction",
-    homeSummary: "Treats scanned-ECG recovery as an inverse imaging problem, evaluating processing choices by their preservation of physiological waveform structure.",
-    repo: null,
-  },
 ];
 
 export const publications = [
@@ -109,6 +83,12 @@ export const publications = [
   { slug: null, anchor: null, title: "State Estimation in Non-Stationary Geophysical Systems under Forcing and Sparse Sensing", authors: null, venue: null, status: "In preparation", detail: null, paper: null, pdf: null, doi: null },
   { slug: null, anchor: null, title: "Operator-Based Stability Certification for Partially Observed, Forced Geophysical Systems", authors: null, venue: null, status: "In preparation", detail: null, paper: null, pdf: null, doi: null },
 ];
+
+export const futureDirection = {
+  title: "Geophysical State Reconstruction and Stability Assessment",
+  status: "Future direction",
+  summary: "Exploring physics-structured state reconstruction and stability assessment for non-stationary geophysical systems under forcing and sparse sensing.",
+};
 
 export const capabilities = [
   ["Estimation", "Nonlinear observers, recursive filtering, Kalman filtering, probabilistic tracking"],

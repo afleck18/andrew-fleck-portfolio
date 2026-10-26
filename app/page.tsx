@@ -17,6 +17,11 @@ const publicationSummaries: Record<string, string> = {
   "observer-dynamics-robotic-state-estimation": "Extends the observer-reliability program into a robotic implementation context using Astrobee's native estimator and recorded flight data.",
 };
 
+const publicationDisplayTitles: Record<string, string> = {
+  "when-corruption-looks-normal": "Observer Reliability Under Corrupted Sensing",
+  "observer-dynamics-robotic-state-estimation": "Observer Dynamics in Robotic State Estimation",
+};
+
 const projectVisuals: Record<string, { src: StaticImageData; alt: string }> = {
   "robust-estimation": {
     src: systemDiagram,
@@ -53,13 +58,13 @@ export default function Home() {
     </section>
 
     <section className="home-publications">
-      <div className="home-section-heading"><p className="section-code">01 / Submitted manuscripts</p><div><h2>Submitted manuscripts</h2><p>Current work extending observer reliability into corrupted-sensing and robotic state-estimation contexts.</p></div></div>
+      <div className="home-section-heading"><p className="section-code">01 / Submitted work</p><div><h2>Submitted work</h2><p>Observer-reliability research in corrupted-sensing and robotic state-estimation contexts.</p></div></div>
       <div className="home-publication-list">{submittedPublications.map((publication) => {
         const href = `/publications/${publication.slug}`;
         const status = publication.venue?.includes("SII") ? "Submitted · IEEE/SICE SII 2027" : "Submitted · ACC 2027";
         return <article className="home-publication" key={publication.title}>
           <p className="publication-meta">{status}</p>
-          <h3><Link href={href}>{publication.title}</Link></h3>
+          <h3><Link href={href}>{publicationDisplayTitles[publication.slug!]}</Link></h3>
           <p className="home-publication-authors">{publication.authors}</p>
           {publication.detail && <p className="home-publication-detail">{publication.detail}</p>}
           <p className="home-publication-summary">{publicationSummaries[publication.slug!]}</p>
@@ -70,7 +75,7 @@ export default function Home() {
     </section>
 
     <section className="work-section">
-      <div className="home-section-heading"><p className="section-code">02 / Selected projects</p><div><h2>Selected projects</h2><p>Projects exploring estimation, sensing, and reconstruction through computational and experimental work.</p></div></div>
+      <div className="home-section-heading"><p className="section-code">02 / Selected projects</p><div><h2>Selected projects</h2><p>Two computational implementations focused on estimation reliability and dynamical inference.</p></div></div>
       <div className="selected-project-grid">{projects.map((project) => {
         const detailHref = `/research/projects/${project.slug}`;
         const visual = projectVisuals[project.slug];

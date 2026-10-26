@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Eyebrow, Shell } from "../components";
-import { projects, publications } from "../data";
+import { futureDirection, projects, publications } from "../data";
 import { ProjectFigure, type ProjectFigureData } from "../ProjectFigure";
 import cdcGeometryContraction from "../../public/cdc-geometry-contraction-rmse.png";
 import systemDiagram from "../../public/robust-estimation-system-diagram.png";
@@ -9,7 +9,7 @@ import visionStability from "../../public/vision-stability.png";
 
 const base = process.env.NEXT_PUBLIC_SITE_URL || "https://afleck18.github.io/andrew-fleck-portfolio";
 const metadataTitle = "Research — Andrew Fleck";
-const metadataDescription = "Research themes and projects in nonlinear observers, partial observation, sensing, tracking, and signal reconstruction.";
+const metadataDescription = "Research themes and projects in nonlinear observers, estimation reliability, and dynamical inference under partial observation.";
 export const metadata: Metadata = { title: "Research", description: metadataDescription, alternates: { canonical: `${base}/research/` }, openGraph: { title: metadataTitle, description: metadataDescription, url: `${base}/research/`, type: "website" }, twitter: { card: "summary", title: metadataTitle, description: metadataDescription } };
 
 const publicationVisuals: Array<ProjectFigureData | null> = [
@@ -19,8 +19,6 @@ const publicationVisuals: Array<ProjectFigureData | null> = [
     caption: "Sensitivity sweep comparing contraction-certificate behavior and observer RMSE as measurement sensitivity varies.",
     ariaLabel: "CDC sensitivity, contraction-certificate, and observer-RMSE figure",
   },
-  null,
-  null,
   null,
   null,
 ];
@@ -38,8 +36,6 @@ const projectVisuals: Array<ProjectFigureData | null> = [
     caption: "Comparison of stability estimates under good and degraded measurement quality.",
     ariaLabel: "measurement-quality and stability-estimation figure",
   },
-  null,
-  null,
 ];
 
 const themes = [
@@ -60,12 +56,14 @@ const themes = [
         kind: "publication",
         index: 1,
         label: "Submitted manuscript · IEEE/SICE SII 2027",
+        displayTitle: "Observer Reliability Under Corrupted Sensing",
         summary: "Studies observer reliability across physical sensing, measurement interpretation, observer dynamics, configurable correction, and downstream reliability assessment.",
       },
       {
         kind: "publication",
         index: 2,
         label: "Submitted manuscript · ACC 2027",
+        displayTitle: "Observer Dynamics in Robotic State Estimation",
         summary: "Extends the observer-reliability project into robotic state estimation using Astrobee's native estimator and recorded flight data.",
       },
       {
@@ -93,29 +91,6 @@ const themes = [
       },
     ],
   },
-  {
-    slug: "learning-enabled-sensing",
-    number: "03",
-    title: "Sensing, Tracking, and Signal Reconstruction",
-    keywords: "Visual sensing · Probabilistic tracking · Inverse imaging",
-    question: "How can trajectories and meaningful signal structure be recovered from noisy visual and image-based measurements?",
-    items: [
-      {
-        kind: "project",
-        index: 2,
-        label: "Research engineering · Visual sensing · Tracking",
-        displayTitle: "Vision-Based State Estimation and Tracking",
-        summary: "Developed sensing and tracking pipelines that combine learned visual measurements with probabilistic filtering to estimate trajectories from RGB and thermal video.",
-      },
-      {
-        kind: "project",
-        index: 3,
-        label: "Undergraduate thesis · Inverse imaging",
-        displayTitle: "ECG Waveform Reconstruction",
-        summary: "Reconstructed ECG waveforms from scanned images using image processing and filtering, with an emphasis on preserving physiological signal structure under noise and distortion.",
-      },
-    ],
-  },
 ] as const;
 
 function statusClass(status: string) {
@@ -129,7 +104,7 @@ export default function Research() {
     <section className="page-intro publication-intro">
       <Eyebrow>Research & projects</Eyebrow>
       <h1>Estimation and inference under incomplete sensing</h1>
-      <p>My research explores how dynamics, sensing conditions, and physical structure shape estimation and inference. The themes below connect theoretical work with computational studies and sensing applications.</p>
+      <p>Research on how measurement structure and partial observation shape observer behavior, estimation reliability, and dynamical assessment.</p>
     </section>
     <div className="case-studies">{themes.map((theme) => <section className="case-study research-theme" id={theme.slug} key={theme.slug}>
       <div className="case-index">
@@ -153,7 +128,7 @@ export default function Research() {
                   <div className="theme-item-content">
                     <p className="theme-item-kicker">{item.label}</p>
                     <span className={`status ${statusClass(publication.status)}`}>{publication.status}</span>
-                    <h4>{publicationHref ? <Link href={publicationHref}>{publication.title}</Link> : publication.title}</h4>
+                    <h4>{publicationHref ? <Link href={publicationHref}>{"displayTitle" in item ? item.displayTitle : publication.title}</Link> : publication.title}</h4>
                     {publication.authors && <p className="theme-item-authors">{publication.authors}</p>}
                     {publication.detail && <p className="theme-item-detail">{publication.detail}</p>}
                     <p>{item.summary}</p>
@@ -182,7 +157,7 @@ export default function Research() {
     </section>)}</div>
     <section className="future-directions" aria-labelledby="future-directions-title">
       <p className="section-code">Future directions</p>
-      <div><h2 id="future-directions-title">Work in preparation</h2><p>Early-stage topics are listed separately from completed projects and submitted manuscripts.</p><ul>{publications.filter((publication) => publication.status === "In preparation").map((publication) => <li key={publication.title}>{publication.title}</li>)}</ul></div>
+      <div><h2 id="future-directions-title">{futureDirection.title}</h2><p>{futureDirection.summary}</p><span className="status preparation">{futureDirection.status}</span></div>
     </section>
   </Shell>;
 }
