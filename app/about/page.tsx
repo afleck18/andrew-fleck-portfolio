@@ -54,7 +54,7 @@ export default function About() {
     </section>
     <section className="capabilities">
       <div className="section-head about-capabilities-head"><Eyebrow>Technical capabilities</Eyebrow><h2>Methods and tools</h2></div>
-      {capabilities.map(([name, items]) => <div className="capability-row" key={name}><h3>{name}</h3><p>{items}</p></div>)}
+      {capabilities.map(({ name, items, additional }) => <div className="capability-row" key={name}><h3>{name}</h3><p>{items}{additional && <span className="capability-additional">{additional}</span>}</p></div>)}
     </section>
   </Shell>;
 }

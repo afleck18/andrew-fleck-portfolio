@@ -89,9 +89,10 @@ export const futureDirection = {
 };
 
 export const capabilities = [
-  ["Estimation", "Nonlinear observers, recursive filtering, Kalman filtering, probabilistic tracking"],
-  ["Analysis and modeling", "Nonlinear dynamical systems, stability and contraction analysis, convex optimization"],
-  ["Sensing and reconstruction", "Computer vision, RGB/thermal sensing, inverse imaging, signal processing"],
-  ["Scientific computing", "Python (NumPy, SciPy, OpenCV), MATLAB"],
-  ["Engineering systems", "Data pipelines, distributed infrastructure, Azure, Citrix, PowerShell"],
+  { name: "Estimation", items: "State estimation, nonlinear observers, recursive and Kalman filtering, probabilistic tracking" },
+  { name: "Dynamics and control", items: "Nonlinear systems, stability analysis, contraction theory, convex optimization" },
+  { name: "Learning and sensing", items: "Computer vision, YOLO-based detection and tracking, learning-enabled state estimation, RGB/thermal sensing, supervised machine learning (Random Forest, XGBoost)" },
+  { name: "Signal processing and reconstruction", items: "Signal processing and inverse imaging" },
+  { name: "Programming", items: "Python (NumPy, SciPy, OpenCV), MATLAB, C", additional: "Additional languages: R, SQL, JavaScript" },
+  { name: "Engineering systems", items: "Data pipelines, distributed systems, Azure, Citrix, PowerShell" },
 ];

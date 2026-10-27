@@ -15,6 +15,12 @@ const pages = [
   ["out/about/index.html", `${base}/about/`],
 ];
 
+function projectContextWordCount(html) {
+  const section = html.match(/<h2>Project context<\/h2>([\s\S]*?)<\/section>/)?.[1] || "";
+  const text = section.replace(/<[^>]+>/g, " ").replace(/&(?:apos|#x27);/g, "'").replace(/\s+/g, " ").trim();
+  return text ? text.split(" ").length : 0;
+}
+
 test("static export contains complete navigation, privacy metadata, and canonical URLs", async () => {
   for (const [page, url] of pages) {
     const html = await readFile(page, "utf8");
@@ -80,6 +86,9 @@ test("SII page has distinct framing, compact status, and a disclosure-safe conte
   assert.match(html, /2027 IEEE\/SICE International Symposium on System Integration \(SII 2027\)/);
   assert.match(html, /<dt>Venue<\/dt>.*<dt>Status<\/dt><dd>Submitted<\/dd>/);
   assert.match(html, /Physical sensing.*Measurement interpretation.*Observer dynamics.*Reliability assessment/);
+  assert.match(html, /structured corruption/);
+  assert.match(html, /publications\/observer-dynamics-robotic-state-estimation/);
+  assert.ok(projectContextWordCount(html) >= 180 && projectContextWordCount(html) <= 240);
   assert.match(html, /General context diagram; no unpublished result data are shown/);
   assert.doesNotMatch(html, /<h2>Abstract<\/h2>|DOI|arXiv|Paper ↗|bounded, diagnostically nominal|coherent corruption/);
 });
@@ -91,6 +100,9 @@ test("ACC page has a distinct robotic implementation identity without private de
   assert.match(html, /Aditi Acharya and Andrew Fleck/);
   assert.match(html, /<dt>Venue<\/dt><dd>ACC 2027<\/dd>.*<dt>Status<\/dt><dd>Submitted<\/dd>/);
   assert.match(html, /Astrobee.*native estimator.*recorded flight data/);
+  assert.match(html, /observer interventions/);
+  assert.match(html, /publications\/when-corruption-looks-normal/);
+  assert.ok(projectContextWordCount(html) >= 180 && projectContextWordCount(html) <= 240);
   assert.match(html, /General context diagram; no unpublished result data are shown/);
   assert.doesNotMatch(html, /historical calibration|matched-action chronology|differential silence|Paper ↗|Code ↗/i);
 });
@@ -109,6 +121,10 @@ test("research index links every substantive card to a real detail page", async 
   assert.match(html, /This direction combines physics-structured reconstruction of non-stationary geophysical states from sparse observations under external forcing with stability assessment of the reconstructed dynamics/);
   assert.match(html, /Submitted · SII 2027/);
   assert.match(html, /Submitted · ACC 2027/);
+  assert.match(html, /Observer Reliability Across Sensing Conditions/);
+  assert.match(html, /NONLINEAR OBSERVERS · LEARNED MEASUREMENT GEOMETRY · CORRUPTED SENSING/);
+  assert.match(html, /How do sensing conditions and observer corrections shape the reliability of state estimates\?/);
+  assert.doesNotMatch(html, /Measurement Geometry and Observer Decisions|Information constraints/);
   assert.doesNotMatch(html, /Submitted manuscript/);
   assert.doesNotMatch(html, /Vision-Based State Estimation|ECG Waveform Reconstruction|research\/projects\/(?:vision-tracking|ecg-reconstruction)\/|Non-Stationary Geophysical Systems|Operator-Based Stability Certification|historical calibration|matched-action chronology|differential silence/);
 });
@@ -134,9 +150,15 @@ test("about page restores the fuller experience, education, capabilities, dates,
   assert.match(html, /audio filtering to isolate aggression periods/);
   assert.match(html, /model predicting PM2\.5 from local measurements/);
   assert.match(html, /ECG waveform reconstruction from scanned images as an inverse imaging problem/);
-  assert.match(html, /Analysis and modeling/);
-  assert.match(html, /Sensing and reconstruction/);
+  assert.match(html, /Dynamics and control/);
+  assert.match(html, /Learning and sensing/);
+  assert.match(html, /Signal processing and reconstruction/);
+  assert.match(html, /YOLO-based detection and tracking/);
+  assert.match(html, /supervised machine learning \(Random Forest, XGBoost\)/);
+  assert.match(html, /Python \(NumPy, SciPy, OpenCV\), MATLAB, C/);
+  assert.match(html, /Additional languages: R, SQL, JavaScript/);
   assert.match(html, /Engineering systems/);
+  assert.doesNotMatch(html, /unsupervised learning/i);
   assert.match(html, /andrew-fleck-resume\.pdf/);
   const pdf = await readFile("out/andrew-fleck-resume.pdf");
   assert.equal(pdf.subarray(0, 5).toString(), "%PDF-");

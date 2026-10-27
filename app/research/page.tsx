@@ -42,9 +42,9 @@ const themes = [
   {
     slug: "observer-reliability",
     number: "01",
-    title: "Measurement Geometry and Observer Decisions",
-    keywords: "Nonlinear observers · Measurement geometry · Information constraints",
-    question: "How do measurement structure and available information limit the design and operation of observers?",
+    title: "Observer Reliability Across Sensing Conditions",
+    keywords: "NONLINEAR OBSERVERS · LEARNED MEASUREMENT GEOMETRY · CORRUPTED SENSING",
+    question: "How do sensing conditions and observer corrections shape the reliability of state estimates?",
     items: [
       {
         kind: "publication",
